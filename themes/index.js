@@ -2,6 +2,7 @@ import { StyleSheet } from "react-native";
 
 export const theme = {
 	featureColor: "#f7287b",
+	secondaryColor: "#c717fc",
 	backgroundColor: "beige",
 	shadowColor: "black",
 	shadowOffset: { height: 2, width: 0 },

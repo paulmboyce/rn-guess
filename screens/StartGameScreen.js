@@ -19,11 +19,11 @@ const StartGameScreen = (props) => {
 				<Text>Enter a number:</Text>
 				<TextInput style={styles.inputField} />
 				<View style={styles.buttonLayout}>
-					<View style={styles.buttonContainer}>
-						<Button title="Reset" />
+					<View style={styles.buttonWrapper}>
+						<Button title="Reset" color={theme.secondaryColor} />
 					</View>
-					<View style={styles.buttonContainer}>
-						<Button title="Confirm" />
+					<View style={styles.buttonWrapper}>
+						<Button title="Confirm" color={theme.featureColor} />
 					</View>
 				</View>
 			</Card>
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
 		justifyContent: "space-between",
 		marginTop: 15,
 	},
-	buttonContainer: {
+	buttonWrapper: {
 		width: "45%",
 	},
 });
