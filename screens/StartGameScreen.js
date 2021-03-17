@@ -9,19 +9,20 @@ import {
 } from "react-native";
 
 import { theme, themeStyles } from "../themes";
+import Card from "../components/Card";
 
 const StartGameScreen = (props) => {
 	return (
 		<View style={styles.screen}>
 			<Text style={styles.title}>Start a New Game!</Text>
-			<View style={{ ...styles.inputContainer, ...themeStyles.shadowBorder }}>
+			<Card style={{ ...styles.inputContainer, ...themeStyles.shadowBorder }}>
 				<Text>Enter a number:</Text>
 				<TextInput style={styles.inputField} />
 				<View style={styles.buttonContainer}>
 					<Button style={styles.button} title="Reset" />
 					<Button style={styles.button} title="Confirm" />
 				</View>
-			</View>
+			</Card>
 		</View>
 	);
 };
@@ -36,12 +37,6 @@ const styles = StyleSheet.create({
 		fontSize: 22,
 		fontWeight: "600",
 		marginVertical: 50,
-	},
-	inputContainer: {
-		width: 300,
-		maxWidth: "80%",
-		alignItems: "center",
-		padding: 20,
 	},
 
 	inputField: {
