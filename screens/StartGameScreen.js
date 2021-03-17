@@ -23,7 +23,7 @@ const StartGameScreen = (props) => {
 						<Button title="Reset" color={theme.secondaryColor} />
 					</View>
 					<View style={styles.buttonWrapper}>
-						<Button title="Confirm" color={theme.featureColor} />
+						<Button title="Confirm" color={theme.primaryColor} />
 					</View>
 				</View>
 			</Card>

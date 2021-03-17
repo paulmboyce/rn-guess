@@ -1,10 +1,17 @@
 import { StyleSheet } from "react-native";
 
+const Colors = {
+	primary: "#f7287b",
+	secondary: "#c717fc",
+	background: "linen",
+	shadow: "black",
+};
+
 export const theme = {
-	featureColor: "#f7287b",
-	secondaryColor: "#c717fc",
-	backgroundColor: "beige",
-	shadowColor: "black",
+	primaryColor: Colors.primary,
+	secondaryColor: Colors.secondary,
+	backgroundColor: Colors.background,
+	shadowColor: Colors.shadow,
 	shadowOffset: { height: 2, width: 0 },
 	shadowOpacity: 0.26,
 	shadowRadius: 5,
