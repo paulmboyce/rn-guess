@@ -7,7 +7,7 @@ const Colors = {
 	shadow: "black",
 };
 
-export const theme = {
+export const Theme = {
 	primaryColor: Colors.primary,
 	secondaryColor: Colors.secondary,
 	backgroundColor: Colors.background,
@@ -19,14 +19,14 @@ export const theme = {
 	shadowBorderRadius: 10,
 };
 
-export const themeStyles = StyleSheet.create({
+export const ThemeStyles = StyleSheet.create({
 	shadowBorder: {
-		shadowColor: theme.shadowColor,
-		shadowOffset: theme.shadowOffset,
-		shadowOpacity: theme.shadowOpacity,
-		shadowRadius: theme.shadowRadius,
-		backgroundColor: theme.backgroundColor,
-		elevation: theme.elevation,
-		borderRadius: theme.shadowBorderRadius,
+		shadowColor: Theme.shadowColor,
+		shadowOffset: Theme.shadowOffset,
+		shadowOpacity: Theme.shadowOpacity,
+		shadowRadius: Theme.shadowRadius,
+		backgroundColor: Theme.backgroundColor,
+		elevation: Theme.elevation,
+		borderRadius: Theme.shadowBorderRadius,
 	},
 });

@@ -8,8 +8,9 @@ import {
 	TouchableHighlightComponent,
 } from "react-native";
 
-import { theme, themeStyles } from "../themes";
+import { Theme } from "../themes";
 import Card from "../components/Card";
+import Input from "../components/Input";
 
 const StartGameScreen = (props) => {
 	return (
@@ -17,13 +18,13 @@ const StartGameScreen = (props) => {
 			<Text style={styles.title}>Start a New Game!</Text>
 			<Card style={{ ...styles.inputContainer }}>
 				<Text>Enter a number:</Text>
-				<TextInput style={styles.inputField} />
+				<Input style={styles.inputField} />
 				<View style={styles.buttonLayout}>
 					<View style={styles.buttonWrapper}>
-						<Button title="Reset" color={theme.secondaryColor} />
+						<Button title="Reset" color={Theme.secondaryColor} />
 					</View>
 					<View style={styles.buttonWrapper}>
-						<Button title="Confirm" color={theme.primaryColor} />
+						<Button title="Confirm" color={Theme.primaryColor} />
 					</View>
 				</View>
 			</Card>
@@ -51,8 +52,7 @@ const styles = StyleSheet.create({
 	},
 
 	inputField: {
-		marginVertical: 10,
-		borderBottomWidth: 2,
+		borderWidth: 1,
 		width: "35%",
 	},
 	buttonLayout: {

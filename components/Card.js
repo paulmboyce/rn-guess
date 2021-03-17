@@ -1,14 +1,14 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
 
-import { themeStyles } from "../themes";
+import { ThemeStyles } from "../themes";
 
 const Card = ({ style, children }) => {
 	return (
 		<View
 			style={{
 				...styles.default,
-				...themeStyles.shadowBorder,
+				...ThemeStyles.shadowBorder,
 				...style,
 			}}
 		>

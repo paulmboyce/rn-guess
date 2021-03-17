@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, Dimensions } from "react-native";
 
 import Header from "./components/Header";
 import StartGameScreen from "./screens/StartGameScreen";
-import { theme } from "./themes";
+import { Theme } from "./themes";
 
 export default function App() {
 	return (
@@ -18,7 +18,7 @@ export default function App() {
 const styles = StyleSheet.create({
 	app: {
 		flex: 1,
-		backgroundColor: theme.backgroundColor,
+		backgroundColor: Theme.backgroundColor,
 		alignItems: "center",
 	},
 });
