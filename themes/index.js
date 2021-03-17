@@ -5,12 +5,14 @@ const Colors = {
 	secondary: "#c717fc",
 	background: "linen",
 	shadow: "black",
+	borderColor: "grey",
 };
 
 export const Theme = {
 	primaryColor: Colors.primary,
 	secondaryColor: Colors.secondary,
 	backgroundColor: Colors.background,
+	borderColor: Colors.borderColor,
 	shadowColor: Colors.shadow,
 	shadowOffset: { height: 2, width: 0 },
 	shadowOpacity: 0.26,
