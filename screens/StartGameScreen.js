@@ -15,7 +15,7 @@ const StartGameScreen = (props) => {
 	return (
 		<View style={styles.screen}>
 			<Text style={styles.title}>Start a New Game!</Text>
-			<Card style={{ ...styles.inputContainer, ...themeStyles.shadowBorder }}>
+			<Card style={{ ...styles.inputContainer }}>
 				<Text>Enter a number:</Text>
 				<TextInput style={styles.inputField} />
 				<View style={styles.buttonContainer}>
@@ -37,6 +37,12 @@ const styles = StyleSheet.create({
 		fontSize: 22,
 		fontWeight: "600",
 		marginVertical: 50,
+	},
+	inputContainer: {
+		width: 330,
+		maxWidth: "80%",
+		alignItems: "center",
+		padding: 40,
 	},
 
 	inputField: {

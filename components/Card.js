@@ -3,21 +3,26 @@ import { View, StyleSheet } from "react-native";
 
 import { themeStyles } from "../themes";
 
-const Card = (props) => {
+const Card = ({ style, children }) => {
 	return (
-		<View style={{ ...styles.card, ...themeStyles.shadowBorder }}>
-			{props.children}
+		<View
+			style={{
+				...styles.default,
+				...themeStyles.shadowBorder,
+				...style,
+			}}
+		>
+			{children}
 		</View>
 	);
 };
 
 const styles = StyleSheet.create({
-	card: {
+	default: {
 		width: 300,
 		maxWidth: "80%",
 		alignItems: "center",
 		padding: 20,
 	},
 });
-
 export default Card;
