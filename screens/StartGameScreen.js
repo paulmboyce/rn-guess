@@ -35,7 +35,6 @@ const StartGameScreen = (props) => {
 
 	const confirmInputHander = () => {
 		const intValue = parseInt(enteredValue);
-		console.log(intValue === NaN);
 		if (isNaN(intValue) || intValue <= 0 || intValue > 99) {
 			Alert.alert(
 				`Oops, this value is not valid.`,
@@ -92,15 +91,11 @@ const StartGameScreen = (props) => {
 	const showStartButton = () => {
 		return (
 			<Fragment>
-				<Text style={styles.startText}>
-					Game will use value: {selectedValue}
-				</Text>
-				<View
-					style={{
-						...styles.buttonLayout,
-						justifyContent: "center",
-					}}
-				>
+				<Text>Game will use value:</Text>
+				<Card style={styles.numberContainer}>
+					<Text style={styles.startText}>{selectedValue}</Text>
+				</Card>
+				<View style={styles.buttonLayout}>
 					<View style={styles.buttonWrapperSmall}>
 						<Button
 							title="Back"
@@ -155,7 +150,15 @@ const styles = StyleSheet.create({
 		paddingHorizontal: 20,
 		paddingVertical: 40,
 	},
-
+	numberContainer: {
+		width: "30%",
+		maxWidth: "80%",
+		alignItems: "center",
+		paddingHorizontal: 20,
+		paddingVertical: 10,
+		marginVertical: 25,
+		shadowColor: Theme.primaryColor,
+	},
 	inputField: {
 		borderWidth: 1,
 		width: "18%",
@@ -166,17 +169,21 @@ const styles = StyleSheet.create({
 	buttonLayout: {
 		flexDirection: "row",
 		width: "100%",
-		justifyContent: "space-between",
+		justifyContent: "center",
 		marginTop: 15,
 	},
 	buttonWrapper: {
+		marginHorizontal: 2,
 		width: "45%",
 	},
 	buttonWrapperSmall: {
+		marginHorizontal: 2,
 		width: "25%",
 	},
 	startText: {
 		fontWeight: "600",
+		fontSize: 26,
+		color: Theme.primaryColor,
 	},
 });
 export default StartGameScreen;
