@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, Fragment } from "react";
 import {
 	View,
 	StyleSheet,
@@ -50,10 +50,76 @@ const StartGameScreen = (props) => {
 		setConfirmed(true);
 	};
 
-	const showConfirmedMessage = () => {
-		if (confirmed) {
-			return <Text>Game will use value: {selectedValue}</Text>;
-		}
+	const showInputBox = () => {
+		return (
+			<Fragment>
+				<Text>Enter a number:</Text>
+				<Input
+					blurOnSubmit
+					autoCapitalize="none"
+					autoCorrect={false}
+					maxLength={2}
+					keyboardType="number-pad"
+					style={styles.inputField}
+					onChangeText={onChangeTextHandler}
+					value={enteredValue}
+				/>
+			</Fragment>
+		);
+	};
+
+	const showConfirmResetButtons = () => {
+		return (
+			<View style={styles.buttonLayout}>
+				<View style={styles.buttonWrapper}>
+					<Button
+						title="Reset"
+						color={Theme.secondaryColor}
+						onPress={resetInputHandler}
+					/>
+				</View>
+				<View style={styles.buttonWrapper}>
+					<Button
+						title="Confirm"
+						color={Theme.primaryColor}
+						onPress={confirmInputHander}
+					/>
+				</View>
+			</View>
+		);
+	};
+
+	const showStartButton = () => {
+		return (
+			<Fragment>
+				<Text style={styles.startText}>
+					Game will use value: {selectedValue}
+				</Text>
+				<View
+					style={{
+						...styles.buttonLayout,
+						justifyContent: "center",
+					}}
+				>
+					<View style={styles.buttonWrapperSmall}>
+						<Button
+							title="Back"
+							color={Theme.secondaryColor}
+							onPress={resetInputHandler}
+						/>
+					</View>
+					<View style={styles.buttonWrapper}>
+						<Button
+							title="Start Game!"
+							color={Theme.primaryColor}
+							onPress={() => {
+								console.log("START!");
+							}}
+						/>
+					</View>
+				</View>
+			</Fragment>
+		);
 	};
 
 	return (
@@ -62,35 +128,9 @@ const StartGameScreen = (props) => {
 				<Text style={styles.title}>Start a New Game!</Text>
 
 				<Card style={{ ...styles.inputContainer }}>
-					<Text>Enter a number:</Text>
-					<Input
-						blurOnSubmit
-						autoCapitalize="none"
-						autoCorrect={false}
-						maxLength={2}
-						keyboardType="number-pad"
-						style={styles.inputField}
-						onChangeText={onChangeTextHandler}
-						value={enteredValue}
-					/>
-					{showConfirmedMessage()}
-
-					<View style={styles.buttonLayout}>
-						<View style={styles.buttonWrapper}>
-							<Button
-								title="Reset"
-								color={Theme.secondaryColor}
-								onPress={resetInputHandler}
-							/>
-						</View>
-						<View style={styles.buttonWrapper}>
-							<Button
-								title="Confirm"
-								color={Theme.primaryColor}
-								onPress={confirmInputHander}
-							/>
-						</View>
-					</View>
+					{!confirmed && showInputBox()}
+					{!confirmed && showConfirmResetButtons()}
+					{confirmed && showStartButton()}
 				</Card>
 			</View>
 		</TouchableWithoutFeedback>
@@ -131,6 +171,12 @@ const styles = StyleSheet.create({
 	},
 	buttonWrapper: {
 		width: "45%",
+	},
+	buttonWrapperSmall: {
+		width: "25%",
+	},
+	startText: {
+		fontWeight: "600",
 	},
 });
 export default StartGameScreen;
