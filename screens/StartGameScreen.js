@@ -92,7 +92,7 @@ const StartGameScreen = (props) => {
 	const showStartButton = () => {
 		return (
 			<Fragment>
-				<Text>Game will use value:</Text>
+				<Text>You selected:</Text>
 				<NumberContainer>{selectedValue}</NumberContainer>
 				<View style={styles.buttonLayout}>
 					<View style={styles.buttonWrapperSmall}>
@@ -104,10 +104,11 @@ const StartGameScreen = (props) => {
 					</View>
 					<View style={styles.buttonWrapper}>
 						<Button
-							title="Start Game!"
+							title="Start Game"
 							color={Theme.primaryColor}
 							onPress={() => {
 								console.log("START!");
+								props.onStartGame();
 							}}
 						/>
 					</View>

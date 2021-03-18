@@ -13,20 +13,18 @@ const NumberContainer = (props) => {
 
 const styles = StyleSheet.create({
 	container: {
-		width: "30%",
-		maxWidth: "80%",
 		alignItems: "center",
 		paddingHorizontal: 20,
 		paddingVertical: 10,
 		marginVertical: 25,
-		borderColor: Theme.primaryColor,
-		borderWidth: 2,
+		borderColor: Theme.secondaryColor,
+		borderWidth: 1,
 		borderRadius: 10,
 	},
 	text: {
 		fontWeight: "700",
 		fontSize: 26,
-		color: Theme.primaryColor,
+		color: Theme.secondaryColor,
 	},
 });
 export default NumberContainer;
