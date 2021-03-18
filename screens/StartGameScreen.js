@@ -95,23 +95,14 @@ const StartGameScreen = (props) => {
 				<Text>You selected:</Text>
 				<NumberContainer>{selectedValue}</NumberContainer>
 				<View style={styles.buttonLayout}>
-					<View style={styles.buttonWrapperSmall}>
-						<Button
-							title="Back"
-							color={Theme.secondaryColor}
-							onPress={resetInputHandler}
-						/>
-					</View>
-					<View style={styles.buttonWrapper}>
-						<Button
-							title="Start Game"
-							color={Theme.primaryColor}
-							onPress={() => {
-								console.log("START!");
-								props.onStartGame();
-							}}
-						/>
-					</View>
+					<Button
+						title="Start Game"
+						color={Theme.primaryColor}
+						onPress={() => {
+							console.log("START!");
+							props.onStartGame(selectedValue);
+						}}
+					/>
 				</View>
 			</Fragment>
 		);
@@ -140,7 +131,7 @@ const styles = StyleSheet.create({
 	},
 	title: {
 		fontSize: 22,
-		fontWeight: "600",
+		fontWeight: "400",
 		marginVertical: 50,
 	},
 	inputContainer: {

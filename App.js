@@ -9,8 +9,10 @@ import { Theme } from "./themes";
 
 export default function App() {
 	const [isGameRunning, setIsGameRunning] = useState(false);
+	const [gameNumber, setGameNumber] = useState(null);
 
-	const handleStartGame = () => {
+	const handleStartGame = (selectedNumber) => {
+		setGameNumber(selectedNumber);
 		setIsGameRunning(true);
 	};
 
@@ -23,7 +25,9 @@ export default function App() {
 			<Header title="Best Dimentia App" />
 
 			{!isGameRunning && <StartGameScreen onStartGame={handleStartGame} />}
-			{isGameRunning && <GameScreen onEndGame={handleOnEndGame} />}
+			{isGameRunning && (
+				<GameScreen onEndGame={handleOnEndGame} gameNumber={gameNumber} />
+			)}
 		</View>
 	);
 }
