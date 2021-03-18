@@ -126,6 +126,7 @@ const StartGameScreen = (props) => {
 const styles = StyleSheet.create({
 	screen: {
 		flex: 1,
+		width: "100%",
 		padding: 10,
 		alignItems: "center",
 	},
@@ -157,10 +158,6 @@ const styles = StyleSheet.create({
 	buttonWrapper: {
 		marginHorizontal: 2,
 		width: "45%",
-	},
-	buttonWrapperSmall: {
-		marginHorizontal: 2,
-		width: "25%",
 	},
 });
 export default StartGameScreen;

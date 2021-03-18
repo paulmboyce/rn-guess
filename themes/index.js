@@ -31,4 +31,8 @@ export const ThemeStyles = StyleSheet.create({
 		elevation: Theme.elevation,
 		borderRadius: Theme.shadowBorderRadius,
 	},
+	buttonWrapperSmall: {
+		marginHorizontal: 4,
+		minWidth: "25%",
+	},
 });

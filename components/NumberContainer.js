@@ -14,7 +14,7 @@ const NumberContainer = (props) => {
 const styles = StyleSheet.create({
 	container: {
 		alignItems: "center",
-		paddingHorizontal: 20,
+		paddingHorizontal: 10,
 		paddingVertical: 10,
 		marginVertical: 25,
 		borderColor: Theme.secondaryColor,

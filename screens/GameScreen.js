@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, Fragment } from "react";
 import { View, StyleSheet, Text, Button, Alert } from "react-native";
 
-import { Theme } from "../themes";
+import { Theme, ThemeStyles } from "../themes";
+import NumberContainer from "../components/NumberContainer";
+import Card from "../components/Card";
 
 const generateRandomNumber = (min, max, exclude) => {
 	min = Math.ceil(min);
@@ -57,22 +59,41 @@ const GameScreen = ({ gameNumber, onEndGame }) => {
 
 	return (
 		<View style={styles.screen}>
-			<Text>I am game screen!</Text>
-			{checkForWin() && <Text>---- Game Over! ------</Text>}
-			<Text>I guess {lastGuess}</Text>
-			<Button
-				title="Guess Lower"
-				onPress={() => {
-					guessLower();
-				}}
-			/>
-			<Button
-				title="Guess Higher"
-				onPress={() => {
-					guessHigher();
-				}}
-			/>
-			<Button onPress={onEndGame} title="End Game" />
+			{checkForWin() ? (
+				<Fragment>
+					<Text>---- Game Over! ------</Text>
+					<Button onPress={onEndGame} title="New Game" />
+				</Fragment>
+			) : (
+				<Fragment>
+					<Text>Press UP or DOWN to give the robot clues!</Text>
+					<Card style={styles.card}>
+						<Text>Robot Guess is</Text>
+						<View style={styles.guessClueLayout}>
+							<View style={ThemeStyles.buttonWrapperSmall}>
+								<Button
+									title="LOWER"
+									onPress={guessLower}
+									color={Theme.primaryColor}
+								/>
+							</View>
+							<NumberContainer>{lastGuess}</NumberContainer>
+							<View style={ThemeStyles.buttonWrapperSmall}>
+								<Button
+									title="HIGHER"
+									onPress={guessHigher}
+									color={Theme.primaryColor}
+								/>
+							</View>
+						</View>
+					</Card>
+					<Button
+						onPress={onEndGame}
+						title="End Game"
+						color={Theme.secondaryColor}
+					/>
+				</Fragment>
+			)}
 		</View>
 	);
 };
@@ -80,8 +101,20 @@ const GameScreen = ({ gameNumber, onEndGame }) => {
 const styles = StyleSheet.create({
 	screen: {
 		flex: 1,
-		justifyContent: "center",
+		width: "100%",
+		justifyContent: "space-evenly",
+		alignItems: "center",
 		backgroundColor: Theme.backgroundColor,
+	},
+	guessClueLayout: {
+		width: "80%",
+		flexDirection: "row",
+		justifyContent: "center",
+		alignItems: "center",
+	},
+	card: {
+		width: "100%",
+		padding: 10,
 	},
 });
 
