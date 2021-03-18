@@ -12,6 +12,7 @@ import {
 import { Theme } from "../themes";
 import Card from "../components/Card";
 import Input from "../components/Input";
+import NumberContainer from "../components/NumberContainer";
 
 const StartGameScreen = (props) => {
 	const [enteredValue, setEnteredValue] = useState("");
@@ -92,9 +93,7 @@ const StartGameScreen = (props) => {
 		return (
 			<Fragment>
 				<Text>Game will use value:</Text>
-				<Card style={styles.numberContainer}>
-					<Text style={styles.startText}>{selectedValue}</Text>
-				</Card>
+				<NumberContainer>{selectedValue}</NumberContainer>
 				<View style={styles.buttonLayout}>
 					<View style={styles.buttonWrapperSmall}>
 						<Button
@@ -150,15 +149,6 @@ const styles = StyleSheet.create({
 		paddingHorizontal: 20,
 		paddingVertical: 40,
 	},
-	numberContainer: {
-		width: "30%",
-		maxWidth: "80%",
-		alignItems: "center",
-		paddingHorizontal: 20,
-		paddingVertical: 10,
-		marginVertical: 25,
-		shadowColor: Theme.primaryColor,
-	},
 	inputField: {
 		borderWidth: 1,
 		width: "18%",
@@ -179,11 +169,6 @@ const styles = StyleSheet.create({
 	buttonWrapperSmall: {
 		marginHorizontal: 2,
 		width: "25%",
-	},
-	startText: {
-		fontWeight: "600",
-		fontSize: 26,
-		color: Theme.primaryColor,
 	},
 });
 export default StartGameScreen;
