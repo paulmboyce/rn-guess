@@ -10,13 +10,14 @@ const GameOverScreen = ({ onClickNewGame }) => {
 				<Text style={ThemeStyles.title}>Game Over!</Text>
 			</View>
 			<View style={{ flex: 2 }}>
-				<Text>Want to play again?</Text>
-				<Text> </Text>
-				<Button
-					onPress={onClickNewGame}
-					title="PLAY AGAIN"
-					color={Theme.primaryColor}
-				/>
+				<Text style={ThemeStyles.text}>Want to play again?</Text>
+				<View style={{ paddingTop: 20 }}>
+					<Button
+						onPress={onClickNewGame}
+						title="PLAY AGAIN"
+						color={Theme.primaryColor}
+					/>
+				</View>
 			</View>
 		</View>
 	);

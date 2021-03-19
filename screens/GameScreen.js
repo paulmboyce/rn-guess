@@ -62,9 +62,11 @@ const GameScreen = ({ gameNumber, onClickEndGame, onGameOver }) => {
 
 	return (
 		<View style={styles.screen}>
-			<Text>{`Press LOWER or HIGHER buttons\n        to give the robot clues.`}</Text>
+			<Text
+				style={ThemeStyles.text}
+			>{`Press LOWER or HIGHER buttons\n        to give the robot clues.`}</Text>
 			<Card style={styles.card}>
-				<Text>Robot Guess is</Text>
+				<Text style={ThemeStyles.text}>Robot Guess is</Text>
 				<View style={styles.guessClueLayout}>
 					<View style={ThemeStyles.buttonWrapperSmall}>
 						<Button

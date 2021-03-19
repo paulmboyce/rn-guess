@@ -6,11 +6,25 @@ const Colors = {
 	background: "linen",
 	shadow: "black",
 	borderColor: "grey",
+	titleColor: "black",
+	fontColor: "black",
+};
+
+const DarkColors = {
+	primary: "green",
+	secondary: "grey",
+	background: "black",
+	shadow: "grey",
+	borderColor: "linen",
+	titleColor: "white",
+	fontColor: "white",
 };
 
 export const Theme = {
 	primaryColor: Colors.primary,
 	secondaryColor: Colors.secondary,
+	titleColor: Colors.titleColor,
+	fontColor: Colors.fontColor,
 	backgroundColor: Colors.background,
 	borderColor: Colors.borderColor,
 	shadowColor: Colors.shadow,
@@ -39,5 +53,6 @@ export const ThemeStyles = StyleSheet.create({
 		fontSize: 22,
 		fontWeight: "400",
 		marginVertical: 50,
+		color: Theme.titleColor,
 	},
 });

@@ -53,7 +53,7 @@ const StartGameScreen = (props) => {
 	const showInputBox = () => {
 		return (
 			<Fragment>
-				<Text>Enter a number:</Text>
+				<Text style={ThemeStyles.text}>Enter a number:</Text>
 				<Input
 					blurOnSubmit
 					autoCapitalize="none"
@@ -92,7 +92,7 @@ const StartGameScreen = (props) => {
 	const showStartButton = () => {
 		return (
 			<Fragment>
-				<Text>You selected:</Text>
+				<Text style={ThemeStyles.text}>You selected:</Text>
 				<NumberContainer>{selectedValue}</NumberContainer>
 				<View style={styles.buttonLayout}>
 					<Button
@@ -144,6 +144,7 @@ const styles = StyleSheet.create({
 		textAlign: "center",
 		fontSize: 18,
 		fontWeight: "400",
+		color: Theme.fontColor,
 	},
 	buttonLayout: {
 		flexDirection: "row",
