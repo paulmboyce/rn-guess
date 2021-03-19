@@ -60,13 +60,13 @@ const GameScreen = ({ gameNumber, onEndGame }) => {
 	return (
 		<View style={styles.screen}>
 			{checkForWin() ? (
-				<Fragment>
+				<View>
 					<Text>---- Game Over! ------</Text>
 					<Button onPress={onEndGame} title="New Game" />
-				</Fragment>
+				</View>
 			) : (
 				<Fragment>
-					<Text>Press UP or DOWN to give the robot clues!</Text>
+					<Text>{`Press LOWER or HIGHER buttons\n        to give the robot clues.`}</Text>
 					<Card style={styles.card}>
 						<Text>Robot Guess is</Text>
 						<View style={styles.guessClueLayout}>
