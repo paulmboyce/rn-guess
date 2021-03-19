@@ -32,8 +32,6 @@ const StartGameScreen = (props) => {
 		setConfirmed(false);
 	};
 
-	let confirmedJSX;
-
 	const confirmInputHander = () => {
 		const intValue = parseInt(enteredValue);
 		if (isNaN(intValue) || intValue <= 0 || intValue > 99) {

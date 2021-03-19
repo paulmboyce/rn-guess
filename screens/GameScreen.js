@@ -1,4 +1,4 @@
-import React, { useState, Fragment, useEffect } from "react";
+import React, { useState, Fragment, useEffect, useRef } from "react";
 import { View, StyleSheet, Text, Button, Alert } from "react-native";
 
 import { Theme, ThemeStyles } from "../themes";
@@ -22,8 +22,8 @@ const GameScreen = ({ gameNumber, onClickEndGame, onGameOver }) => {
 		generateRandomNumber(1, 100, gameNumber)
 	);
 
-	const [minGuess, setMinGuess] = useState(0);
-	const [maxGuess, setMaxGuess] = useState(100);
+	const minGuess = useRef(0);
+	const maxGuess = useRef(100);
 
 	useEffect(() => {
 		checkForWin();
@@ -46,18 +46,18 @@ const GameScreen = ({ gameNumber, onClickEndGame, onGameOver }) => {
 			return;
 		}
 
-		const top = Math.min(maxGuess, lastGuess);
-		setMaxGuess(top);
-		setLastGuess(generateRandomNumber(minGuess, top, lastGuess));
+		const top = Math.min(maxGuess.current, lastGuess);
+		maxGuess.current = top;
+		setLastGuess(generateRandomNumber(minGuess.current, top, lastGuess));
 	};
 	const guessHigher = () => {
 		if (lastGuess > gameNumber) {
 			showCheatAlert();
 			return;
 		}
-		const bottom = Math.max(minGuess, lastGuess);
-		setMinGuess(bottom);
-		setLastGuess(generateRandomNumber(bottom, maxGuess, lastGuess));
+		const bottom = Math.max(minGuess.current, lastGuess);
+		minGuess.current = bottom;
+		setLastGuess(generateRandomNumber(bottom, maxGuess.current, lastGuess));
 	};
 
 	return (
