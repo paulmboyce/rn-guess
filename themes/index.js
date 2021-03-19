@@ -35,4 +35,9 @@ export const ThemeStyles = StyleSheet.create({
 		marginHorizontal: 4,
 		minWidth: "25%",
 	},
+	title: {
+		fontSize: 22,
+		fontWeight: "400",
+		marginVertical: 50,
+	},
 });

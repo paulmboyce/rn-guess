@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, Fragment, useEffect } from "react";
 import { View, StyleSheet, Text, Button, Alert } from "react-native";
 
 import { Theme, ThemeStyles } from "../themes";
@@ -17,7 +17,7 @@ const generateRandomNumber = (min, max, exclude) => {
 	return random;
 };
 
-const GameScreen = ({ gameNumber, onEndGame }) => {
+const GameScreen = ({ gameNumber, onClickEndGame, onGameOver }) => {
 	const [lastGuess, setLastGuess] = useState(
 		generateRandomNumber(1, 100, gameNumber)
 	);
@@ -25,12 +25,15 @@ const GameScreen = ({ gameNumber, onEndGame }) => {
 	const [minGuess, setMinGuess] = useState(0);
 	const [maxGuess, setMaxGuess] = useState(100);
 
+	useEffect(() => {
+		checkForWin();
+	});
+
 	const checkForWin = () => {
 		if (gameNumber === lastGuess) {
 			console.log(`WIN! ${gameNumber} = ${lastGuess}`);
-			return true;
+			onGameOver();
 		}
-		return false;
 	};
 
 	const showCheatAlert = () => {
@@ -59,41 +62,32 @@ const GameScreen = ({ gameNumber, onEndGame }) => {
 
 	return (
 		<View style={styles.screen}>
-			{checkForWin() ? (
-				<View>
-					<Text>---- Game Over! ------</Text>
-					<Button onPress={onEndGame} title="New Game" />
+			<Text>{`Press LOWER or HIGHER buttons\n        to give the robot clues.`}</Text>
+			<Card style={styles.card}>
+				<Text>Robot Guess is</Text>
+				<View style={styles.guessClueLayout}>
+					<View style={ThemeStyles.buttonWrapperSmall}>
+						<Button
+							title="LOWER"
+							onPress={guessLower}
+							color={Theme.primaryColor}
+						/>
+					</View>
+					<NumberContainer>{lastGuess}</NumberContainer>
+					<View style={ThemeStyles.buttonWrapperSmall}>
+						<Button
+							title="HIGHER"
+							onPress={guessHigher}
+							color={Theme.primaryColor}
+						/>
+					</View>
 				</View>
-			) : (
-				<Fragment>
-					<Text>{`Press LOWER or HIGHER buttons\n        to give the robot clues.`}</Text>
-					<Card style={styles.card}>
-						<Text>Robot Guess is</Text>
-						<View style={styles.guessClueLayout}>
-							<View style={ThemeStyles.buttonWrapperSmall}>
-								<Button
-									title="LOWER"
-									onPress={guessLower}
-									color={Theme.primaryColor}
-								/>
-							</View>
-							<NumberContainer>{lastGuess}</NumberContainer>
-							<View style={ThemeStyles.buttonWrapperSmall}>
-								<Button
-									title="HIGHER"
-									onPress={guessHigher}
-									color={Theme.primaryColor}
-								/>
-							</View>
-						</View>
-					</Card>
-					<Button
-						onPress={onEndGame}
-						title="End Game"
-						color={Theme.secondaryColor}
-					/>
-				</Fragment>
-			)}
+			</Card>
+			<Button
+				onPress={onClickEndGame}
+				title="End Game"
+				color={Theme.secondaryColor}
+			/>
 		</View>
 	);
 };
@@ -101,6 +95,7 @@ const GameScreen = ({ gameNumber, onEndGame }) => {
 const styles = StyleSheet.create({
 	screen: {
 		flex: 1,
+		padding: 10,
 		width: "100%",
 		justifyContent: "space-evenly",
 		alignItems: "center",
@@ -113,7 +108,7 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 	},
 	card: {
-		width: "100%",
+		maxWidth: "80%",
 		padding: 10,
 	},
 });

@@ -9,7 +9,7 @@ import {
 	Alert,
 } from "react-native";
 
-import { Theme } from "../themes";
+import { Theme, ThemeStyles } from "../themes";
 import Card from "../components/Card";
 import Input from "../components/Input";
 import NumberContainer from "../components/NumberContainer";
@@ -111,7 +111,7 @@ const StartGameScreen = (props) => {
 	return (
 		<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
 			<View style={styles.screen}>
-				<Text style={styles.title}>Start a New Game!</Text>
+				<Text style={ThemeStyles.title}>Start a New Game!</Text>
 
 				<Card style={{ ...styles.inputContainer }}>
 					{!confirmed && showInputBox()}
@@ -130,11 +130,7 @@ const styles = StyleSheet.create({
 		padding: 10,
 		alignItems: "center",
 	},
-	title: {
-		fontSize: 22,
-		fontWeight: "400",
-		marginVertical: 50,
-	},
+
 	inputContainer: {
 		width: 330,
 		maxWidth: "80%",

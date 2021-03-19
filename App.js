@@ -6,28 +6,56 @@ import Header from "./components/Header";
 import StartGameScreen from "./screens/StartGameScreen";
 import GameScreen from "./screens/GameScreen";
 import { Theme } from "./themes";
+import GameOverScreen from "./screens/GameOverScreen";
 
 export default function App() {
 	const [isGameRunning, setIsGameRunning] = useState(false);
+	const [isGameOver, setIsGameOver] = useState(false);
 	const [gameNumber, setGameNumber] = useState(null);
 
 	const handleStartGame = (selectedNumber) => {
 		setGameNumber(selectedNumber);
 		setIsGameRunning(true);
+		setIsGameOver(false);
 	};
 
-	const handleOnEndGame = () => {
+	const handleOnClickEndGame = () => {
+		handleOnClickNewGame();
+	};
+
+	const handleOnGameOver = () => {
+		console.log(
+			"REFACTOR 2 x boolean flags to 3 separate states, eg GAME_SETUP, GAME_RUNNING, GAME_OVER"
+		);
 		setIsGameRunning(false);
+		setIsGameOver(true);
+	};
+
+	const handleOnClickNewGame = () => {
+		setIsGameRunning(false);
+		setIsGameOver(false);
+	};
+
+	const getCurrentScreen = () => {
+		if (isGameRunning) {
+			return (
+				<GameScreen
+					onGameOver={handleOnGameOver}
+					onClickEndGame={handleOnClickEndGame}
+					gameNumber={gameNumber}
+				/>
+			);
+		}
+		if (isGameOver) {
+			return <GameOverScreen onClickNewGame={handleOnClickNewGame} />;
+		}
+		return <StartGameScreen onStartGame={handleStartGame} />;
 	};
 
 	return (
 		<View style={styles.app}>
 			<Header title="Best Dimentia App" />
-
-			{!isGameRunning && <StartGameScreen onStartGame={handleStartGame} />}
-			{isGameRunning && (
-				<GameScreen onEndGame={handleOnEndGame} gameNumber={gameNumber} />
-			)}
+			{getCurrentScreen()}
 		</View>
 	);
 }
