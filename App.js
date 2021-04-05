@@ -12,6 +12,7 @@ export default function App() {
 	const [isGameRunning, setIsGameRunning] = useState(false);
 	const [isGameOver, setIsGameOver] = useState(false);
 	const [gameNumber, setGameNumber] = useState(null);
+	const [numTries, setNumTries] = useState(0);
 
 	const handleStartGame = (selectedNumber) => {
 		setGameNumber(selectedNumber);
@@ -23,12 +24,13 @@ export default function App() {
 		handleOnClickNewGame();
 	};
 
-	const handleOnGameOver = () => {
+	const handleOnGameOver = (numTries) => {
 		console.log(
 			"REFACTOR 2 x boolean flags to 3 separate states, eg GAME_SETUP, GAME_RUNNING, GAME_OVER"
 		);
 		setIsGameRunning(false);
 		setIsGameOver(true);
+		setNumTries(numTries);
 	};
 
 	const handleOnClickNewGame = () => {
@@ -47,7 +49,12 @@ export default function App() {
 			);
 		}
 		if (isGameOver) {
-			return <GameOverScreen onClickNewGame={handleOnClickNewGame} />;
+			return (
+				<GameOverScreen
+					numTries={numTries}
+					onClickNewGame={handleOnClickNewGame}
+				/>
+			);
 		}
 		return <StartGameScreen onStartGame={handleStartGame} />;
 	};

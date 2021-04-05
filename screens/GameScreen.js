@@ -18,6 +18,7 @@ const generateRandomNumber = (min, max, exclude) => {
 };
 
 const GameScreen = ({ gameNumber, onClickEndGame, onGameOver }) => {
+	const [numTries, setNumTries] = useState(0);
 	const [lastGuess, setLastGuess] = useState(
 		generateRandomNumber(1, 100, gameNumber)
 	);
@@ -32,7 +33,7 @@ const GameScreen = ({ gameNumber, onClickEndGame, onGameOver }) => {
 	const checkForWin = () => {
 		if (gameNumber === lastGuess) {
 			console.log(`WIN! ${gameNumber} = ${lastGuess}`);
-			onGameOver();
+			onGameOver(numTries);
 		}
 	};
 
@@ -49,7 +50,9 @@ const GameScreen = ({ gameNumber, onClickEndGame, onGameOver }) => {
 		const top = Math.min(maxGuess.current, lastGuess);
 		maxGuess.current = top;
 		setLastGuess(generateRandomNumber(minGuess.current, top, lastGuess));
+		setNumTries((numTries) => numTries + 1);
 	};
+
 	const guessHigher = () => {
 		if (lastGuess > gameNumber) {
 			showCheatAlert();
@@ -58,6 +61,7 @@ const GameScreen = ({ gameNumber, onClickEndGame, onGameOver }) => {
 		const bottom = Math.max(minGuess.current, lastGuess);
 		minGuess.current = bottom;
 		setLastGuess(generateRandomNumber(bottom, maxGuess.current, lastGuess));
+		setNumTries((numTries) => numTries + 1);
 	};
 
 	return (

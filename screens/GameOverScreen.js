@@ -3,13 +3,13 @@ import { View, StyleSheet, Text, Button } from "react-native";
 
 import { Theme, ThemeStyles } from "../themes";
 
-const GameOverScreen = ({ onClickNewGame }) => {
+const GameOverScreen = ({ numTries, onClickNewGame }) => {
 	return (
 		<View style={styles.screen}>
 			<View style={{ flex: 1, justifyContent: "center" }}>
-				<Text style={ThemeStyles.title}>Game Over!</Text>
+				<Text style={ThemeStyles.title}>Game Over in {numTries} rounds!</Text>
 			</View>
-			<View style={{ flex: 2 }}>
+			<View style={{ flex: 2, alignItems: "center" }}>
 				<Text style={ThemeStyles.text}>Want to play again?</Text>
 				<View style={{ paddingTop: 20 }}>
 					<Button
