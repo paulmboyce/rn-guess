@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { StyleSheet, Text, View, Dimensions } from "react-native";
 import * as Font from "expo-font";
 import AppLoading from "expo-app-loading";
+import { Asset } from "expo-asset";
 
 import Header from "./components/Header";
 import StartGameScreen from "./screens/StartGameScreen";
@@ -10,11 +11,21 @@ import GameScreen from "./screens/GameScreen";
 import { Theme } from "./themes";
 import GameOverScreen from "./screens/GameOverScreen";
 
-const fetchFonts = async () => {
+const _fetchFonts = async () => {
+	console.log("Loading fonts...");
 	return Font.loadAsync({
 		"open-sans": require("./assets/fonts/OpenSans-Regular.ttf"),
 		"open-sans-bold": require("./assets/fonts/OpenSans-Bold.ttf"),
 	});
+};
+
+const _cacheImagesAsync = async () => {
+	const images = [require("./assets/favicon.png")];
+	console.log("Loading images to cache...");
+	const cacheImages = images.map((image) => {
+		return Asset.fromModule(image).downloadAsync();
+	});
+	return Promise.all(cacheImages);
 };
 
 export default function App() {
@@ -52,7 +63,9 @@ export default function App() {
 		if (!isReady) {
 			return (
 				<AppLoading
-					startAsync={fetchFonts}
+					startAsync={() => {
+						return Promise.all([_cacheImagesAsync(), _fetchFonts()]);
+					}}
 					onFinish={() => {
 						console.log("Loaded resources, starting app...");
 						setIsReady(true);
