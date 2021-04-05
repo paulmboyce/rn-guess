@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
 		borderRadius: 10,
 	},
 	text: {
-		fontWeight: "700",
+		fontFamily: Theme.fontFamilyBold,
 		fontSize: 26,
 		color: Theme.secondaryColor,
 	},

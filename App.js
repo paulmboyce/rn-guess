@@ -8,7 +8,7 @@ import { Asset } from "expo-asset";
 import Header from "./components/Header";
 import StartGameScreen from "./screens/StartGameScreen";
 import GameScreen from "./screens/GameScreen";
-import { Theme } from "./themes";
+//import { Theme } from "./themes";
 import GameOverScreen from "./screens/GameOverScreen";
 
 const _fetchFonts = async () => {
@@ -17,6 +17,41 @@ const _fetchFonts = async () => {
 		"open-sans": require("./assets/fonts/OpenSans-Regular.ttf"),
 		"open-sans-bold": require("./assets/fonts/OpenSans-Bold.ttf"),
 	});
+};
+
+let Theme,
+	styles = {};
+
+const _fetchThemeAndStyle = () => {
+	console.log("Loading theme...");
+	import("./themes")
+		.then((result) => {
+			Theme = result.Theme;
+		})
+		.then(() => {
+			return new Promise((resolve, reject) => {
+				try {
+					console.log("Loading style..");
+					styles = StyleSheet.create({
+						screen: {
+							flex: 1,
+							backgroundColor: Theme.backgroundColor,
+							alignItems: "center",
+						},
+						app: {
+							fontFamily: Theme.fontFamily,
+						},
+					});
+					console.log("Loaded styles: ", styles);
+				} catch (err) {
+					console.log("OOps: ", err);
+				}
+				//	resolve("OK");
+			});
+		})
+		.catch((err) => {
+			console.log("OOPS.. problem loading resources..", err);
+		});
 };
 
 const _cacheImagesAsync = async () => {
@@ -28,7 +63,7 @@ const _cacheImagesAsync = async () => {
 	return Promise.all(cacheImages);
 };
 
-export default function App() {
+function App() {
 	const [isReady, setIsReady] = useState(false);
 	const [isGameRunning, setIsGameRunning] = useState(false);
 	const [isGameOver, setIsGameOver] = useState(false);
@@ -60,26 +95,13 @@ export default function App() {
 	};
 
 	const getCurrentScreen = () => {
-		if (!isReady) {
-			return (
-				<AppLoading
-					startAsync={() => {
-						return Promise.all([_cacheImagesAsync(), _fetchFonts()]);
-					}}
-					onFinish={() => {
-						console.log("Loaded resources, starting app...");
-						setIsReady(true);
-					}}
-					onError={console.warn}
-				/>
-			);
-		}
 		if (isGameRunning) {
 			return (
 				<GameScreen
 					onGameOver={handleOnGameOver}
 					onClickEndGame={handleOnClickEndGame}
 					gameNumber={gameNumber}
+					style={styles.app}
 				/>
 			);
 		}
@@ -88,24 +110,47 @@ export default function App() {
 				<GameOverScreen
 					numTries={numTries}
 					onClickNewGame={handleOnClickNewGame}
+					style={styles.app}
 				/>
 			);
 		}
-		return <StartGameScreen onStartGame={handleStartGame} />;
+		return <StartGameScreen onStartGame={handleStartGame} style={styles.app} />;
 	};
 
-	return (
-		<View style={styles.app}>
-			<Header title="Best Dimentia App" />
-			{getCurrentScreen()}
-		</View>
-	);
+	if (!isReady) {
+		return (
+			<AppLoading
+				startAsync={() => {
+					return Promise.all([
+						_cacheImagesAsync(),
+						_fetchFonts(),
+						_fetchThemeAndStyle(),
+					]).catch((err) => {
+						console.log("OOPS, problem loading assets..", err);
+					});
+				}}
+				onFinish={() => {
+					console.log("Loaded resources, starting app...");
+					setIsReady(true);
+				}}
+				onError={console.warn}
+			/>
+		);
+	} else {
+		if (!styles.screen) {
+			console.log(
+				"Styles (using dynamically loaded Theme) are not ready (DUE TO Fast Refresh). Going to force refresh of assets..."
+			);
+			setIsReady(false);
+		}
+
+		return (
+			<View style={styles.screen}>
+				<Header title="Best Game Ever" style={styles.app} />
+				{getCurrentScreen()}
+			</View>
+		);
+	}
 }
 
-const styles = StyleSheet.create({
-	app: {
-		flex: 1,
-		backgroundColor: Theme.backgroundColor,
-		alignItems: "center",
-	},
-});
+export default App;

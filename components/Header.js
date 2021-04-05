@@ -3,10 +3,10 @@ import { View, Text, StyleSheet, Platform } from "react-native";
 
 import { Theme } from "../themes";
 
-const Header = (props) => {
+const Header = ({ title, style }) => {
 	return (
-		<View style={styles.header}>
-			<Text style={styles.title}>{props.title}</Text>
+		<View style={(style, styles.header)}>
+			<Text style={(style, styles.title)}>{title}</Text>
 		</View>
 	);
 };
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
 	},
 	title: {
 		color: "white",
-		fontWeight: "600",
+		fontFamily: Theme.fontFamilyBold,
 		fontSize: 24,
 		paddingHorizontal: 10,
 	},

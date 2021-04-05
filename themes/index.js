@@ -1,5 +1,10 @@
 import { StyleSheet } from "react-native";
 
+const Fonts = {
+	family: "open-sans",
+	familyBold: "open-sans-bold",
+};
+
 const Colors = {
 	primary: "#f7287b",
 	secondary: "#c717fc",
@@ -33,6 +38,8 @@ export const Theme = {
 	shadowRadius: 5,
 	elevation: 6,
 	shadowBorderRadius: 10,
+	fontFamily: Fonts.family,
+	fontFamilyBold: Fonts.familyBold,
 };
 
 export const ThemeStyles = StyleSheet.create({
@@ -51,8 +58,8 @@ export const ThemeStyles = StyleSheet.create({
 	},
 	title: {
 		fontSize: 22,
-		fontWeight: "400",
 		marginVertical: 50,
 		color: Theme.titleColor,
+		fontFamily: Theme.fontFamilyBold,
 	},
 });

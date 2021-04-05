@@ -17,7 +17,7 @@ const generateRandomNumber = (min, max, exclude) => {
 	return random;
 };
 
-const GameScreen = ({ gameNumber, onClickEndGame, onGameOver }) => {
+const GameScreen = ({ style, gameNumber, onClickEndGame, onGameOver }) => {
 	const [numTries, setNumTries] = useState(0);
 	const [lastGuess, setLastGuess] = useState(
 		generateRandomNumber(1, 100, gameNumber)
@@ -65,14 +65,14 @@ const GameScreen = ({ gameNumber, onClickEndGame, onGameOver }) => {
 	};
 
 	return (
-		<View style={styles.screen}>
+		<View style={(style, styles.screen)}>
 			<Text
-				style={ThemeStyles.text}
+				style={(style, ThemeStyles.text)}
 			>{`Press LOWER or HIGHER buttons\n        to give the robot clues.`}</Text>
-			<Card style={styles.card}>
-				<Text style={ThemeStyles.text}>Robot Guess is</Text>
-				<View style={styles.guessClueLayout}>
-					<View style={ThemeStyles.buttonWrapperSmall}>
+			<Card style={(style, styles.card)}>
+				<Text style={(style, ThemeStyles.text)}>Robot Guess is</Text>
+				<View style={(style, styles.guessClueLayout)}>
+					<View style={(style, ThemeStyles.buttonWrapperSmall)}>
 						<Button
 							title="LOWER"
 							onPress={guessLower}
@@ -80,7 +80,7 @@ const GameScreen = ({ gameNumber, onClickEndGame, onGameOver }) => {
 						/>
 					</View>
 					<NumberContainer>{lastGuess}</NumberContainer>
-					<View style={ThemeStyles.buttonWrapperSmall}>
+					<View style={(style, ThemeStyles.buttonWrapperSmall)}>
 						<Button
 							title="HIGHER"
 							onPress={guessHigher}

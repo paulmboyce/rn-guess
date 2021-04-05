@@ -90,9 +90,9 @@ const StartGameScreen = (props) => {
 	const showStartButton = () => {
 		return (
 			<Fragment>
-				<Text style={ThemeStyles.text}>You selected:</Text>
+				<Text style={(props.style, ThemeStyles.text)}>You selected:</Text>
 				<NumberContainer>{selectedValue}</NumberContainer>
-				<View style={styles.buttonLayout}>
+				<View style={(props.style, styles.buttonLayout)}>
 					<Button
 						title="Start Game"
 						color={Theme.primaryColor}
@@ -108,10 +108,10 @@ const StartGameScreen = (props) => {
 
 	return (
 		<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-			<View style={styles.screen}>
-				<Text style={ThemeStyles.title}>Start a New Game!</Text>
+			<View style={(props.style, styles.screen)}>
+				<Text style={(props.style, ThemeStyles.title)}>Start a New Game!</Text>
 
-				<Card style={{ ...styles.inputContainer }}>
+				<Card style={(props.style, { ...styles.inputContainer })}>
 					{!confirmed && showInputBox()}
 					{!confirmed && showConfirmResetButtons()}
 					{confirmed && showStartButton()}
@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
 		width: "18%",
 		textAlign: "center",
 		fontSize: 18,
-		fontWeight: "400",
+		fontFamily: Theme.fontFamilyBold,
 		color: Theme.fontColor,
 	},
 	buttonLayout: {
