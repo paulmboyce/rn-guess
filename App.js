@@ -16,6 +16,19 @@ function App() {
 	const [numTries, setNumTries] = useState(0);
 	const [styles, setStyles] = useState({});
 
+	if (!isAppReady) {
+		return (
+			<AppLoading
+				startAsync={() => initAssetsThemeStylesAsync(setStyles)}
+				onFinish={() => {
+					console.log("Finished loading resources. Starting app... ");
+					setIsAppReady(true);
+				}}
+				onError={console.warn}
+			/>
+		);
+	}
+
 	const handleStartGame = (selectedNumber) => {
 		setGameNumber(selectedNumber);
 		setIsGameRunning(true);
@@ -63,26 +76,13 @@ function App() {
 		return <StartGameScreen onStartGame={handleStartGame} style={styles.app} />;
 	};
 
-	if (!isAppReady) {
-		return (
-			<AppLoading
-				startAsync={() => initAssetsThemeStylesAsync(setStyles)}
-				onFinish={() => {
-					console.log("Finished loading resources. Starting app... ");
-					setIsAppReady(true);
-				}}
-				onError={console.warn}
-			/>
-		);
-	} else {
-		console.log("Rendering app (with loaded styles)...");
-		return (
-			<View style={styles.screen}>
-				<Header title="Best Fun Game Ever" style={styles.app} />
-				{renderCurrentScreen()}
-			</View>
-		);
-	}
+	console.log("Rendering app (with loaded styles)...");
+	return (
+		<View style={styles.screen}>
+			<Header title="Best Fun Game Ever" style={styles.app} />
+			{renderCurrentScreen()}
+		</View>
+	);
 }
 
 export default App;
