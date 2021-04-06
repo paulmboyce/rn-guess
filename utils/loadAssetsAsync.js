@@ -12,10 +12,11 @@ const _fetchFonts = async () => {
 
 const _fetchThemeAndStyle = (setStyles) => {
 	console.log("Loading theme...");
-	import("../themes")
+	return import("../themes")
 		.then((result) => {
 			Theme = result.Theme;
-
+		})
+		.then((result) => {
 			try {
 				console.log("Loading style..");
 				styles = StyleSheet.create({
@@ -30,6 +31,7 @@ const _fetchThemeAndStyle = (setStyles) => {
 				});
 				console.log("Saving styles to STATE (to survive re-renders):");
 				setStyles(styles);
+				return Promise.resolve("OK");
 			} catch (err) {
 				console.log("Oops: ", err);
 			}
@@ -52,9 +54,9 @@ const initAssetsThemeStylesAsync = async (setStyles) => {
 	try {
 		await _cacheImagesAsync();
 		await _fetchFonts();
-		_fetchThemeAndStyle(setStyles);
+		await _fetchThemeAndStyle(setStyles);
 	} catch (err) {
-		console.log("OOPS, problem loading assets..", err);
+		console.log("OOPS, problem loading assets.. ", err);
 	}
 };
 

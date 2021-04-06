@@ -40,7 +40,7 @@ function App() {
 		setIsGameOver(false);
 	};
 
-	const getCurrentScreen = () => {
+	const renderCurrentScreen = () => {
 		if (isGameRunning) {
 			return (
 				<GameScreen
@@ -79,7 +79,7 @@ function App() {
 		return (
 			<View style={styles.screen}>
 				<Header title="Best Fun Game Ever" style={styles.app} />
-				{getCurrentScreen()}
+				{renderCurrentScreen()}
 			</View>
 		);
 	}
