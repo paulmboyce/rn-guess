@@ -1,4 +1,3 @@
-import { StyleSheet } from "react-native";
 import * as Font from "expo-font";
 import { Asset } from "expo-asset";
 
@@ -10,35 +9,14 @@ const _fetchFonts = async () => {
 	});
 };
 
-const _fetchThemeAndStyle = (setStyles) => {
+const _fetchTheme = async () => {
 	console.log("Loading theme...");
-	return import("../themes")
-		.then((result) => {
-			Theme = result.Theme;
-		})
-		.then((result) => {
-			try {
-				console.log("Loading style..");
-				styles = StyleSheet.create({
-					screen: {
-						flex: 1,
-						backgroundColor: Theme.backgroundColor,
-						alignItems: "center",
-					},
-					app: {
-						fontFamily: Theme.fontFamily,
-					},
-				});
-				console.log("Saving styles to STATE (to survive re-renders):");
-				setStyles(styles);
-				return Promise.resolve("OK");
-			} catch (err) {
-				console.log("Oops: ", err);
-			}
-		})
-		.catch((err) => {
-			console.log("OOPS.. problem loading resources..", err);
-		});
+	try {
+		const result = await import("../themes");
+		Theme = result.Theme;
+	} catch (err) {
+		console.log("OOPS.. problem loading resources (theme)", err);
+	}
 };
 
 const _cacheImagesAsync = async () => {
@@ -50,11 +28,11 @@ const _cacheImagesAsync = async () => {
 	return Promise.all(cacheImages);
 };
 
-const initAssetsThemeStylesAsync = async (setStyles) => {
+const initAssetsThemeStylesAsync = async () => {
 	try {
 		await _cacheImagesAsync();
 		await _fetchFonts();
-		await _fetchThemeAndStyle(setStyles);
+		await _fetchTheme();
 	} catch (err) {
 		console.log("OOPS, problem loading assets.. ", err);
 	}

@@ -8,7 +8,7 @@ import {
 	Alert,
 } from "react-native";
 
-import { ThemeText, ThemeTextBold } from "../components/themed";
+import { ThemeText } from "../components/themed";
 
 import { Theme, ThemeStyles } from "../themes";
 import Card from "../components/Card";
@@ -52,7 +52,7 @@ const StartGameScreen = (props) => {
 	const showInputBox = () => {
 		return (
 			<Fragment>
-				<ThemeTextBold>Enter a number:</ThemeTextBold>
+				<ThemeText>Enter a number:</ThemeText>
 				<Input
 					blurOnSubmit
 					autoCapitalize="none"
@@ -128,6 +128,7 @@ const styles = StyleSheet.create({
 		width: "100%",
 		padding: 10,
 		alignItems: "center",
+		backgroundColor: Theme.backgroundColor,
 	},
 
 	inputContainer: {

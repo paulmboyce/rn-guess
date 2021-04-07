@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View } from "react-native";
+import { View, StyleSheet } from "react-native";
 import AppLoading from "expo-app-loading";
 
 import Header from "./components/Header";
@@ -14,12 +14,11 @@ function App() {
 	const [isGameOver, setIsGameOver] = useState(false);
 	const [gameNumber, setGameNumber] = useState(null);
 	const [numTries, setNumTries] = useState(0);
-	const [styles, setStyles] = useState({});
 
 	if (!isAppReady) {
 		return (
 			<AppLoading
-				startAsync={() => initAssetsThemeStylesAsync(setStyles)}
+				startAsync={initAssetsThemeStylesAsync}
 				onFinish={() => {
 					console.log("Finished loading resources. Starting app... ");
 					setIsAppReady(true);
@@ -75,7 +74,6 @@ function App() {
 		return <StartGameScreen onStartGame={handleStartGame} />;
 	};
 
-	console.log("Rendering app (with loaded styles)...");
 	return (
 		<View style={styles.screen}>
 			<Header title="Best Fun Game Ever" />
@@ -84,4 +82,9 @@ function App() {
 	);
 }
 
+const styles = StyleSheet.create({
+	screen: {
+		flex: 1,
+	},
+});
 export default App;
