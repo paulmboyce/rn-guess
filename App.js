@@ -60,7 +60,6 @@ function App() {
 					onGameOver={handleOnGameOver}
 					onClickEndGame={handleOnClickEndGame}
 					gameNumber={gameNumber}
-					style={styles.app}
 				/>
 			);
 		}
@@ -73,13 +72,13 @@ function App() {
 				/>
 			);
 		}
-		return <StartGameScreen onStartGame={handleStartGame} style={styles.app} />;
+		return <StartGameScreen onStartGame={handleStartGame} />;
 	};
 
 	console.log("Rendering app (with loaded styles)...");
 	return (
 		<View style={styles.screen}>
-			<Header title="Best Fun Game Ever" style={styles.app} />
+			<Header title="Best Fun Game Ever" />
 			{renderCurrentScreen()}
 		</View>
 	);

@@ -62,4 +62,8 @@ export const ThemeStyles = StyleSheet.create({
 		color: Theme.titleColor,
 		fontFamily: Theme.fontFamilyBold,
 	},
+	text: {
+		fontFamily: Theme.fontFamily,
+		color: Theme.fontColor,
+	},
 });

@@ -1,9 +1,10 @@
 import React, { useState, Fragment, useEffect, useRef } from "react";
-import { View, StyleSheet, Text, Button, Alert } from "react-native";
+import { View, StyleSheet, Button, Alert } from "react-native";
 
 import { Theme, ThemeStyles } from "../themes";
 import NumberContainer from "../components/NumberContainer";
 import Card from "../components/Card";
+import { ThemeText } from "../components/themed";
 
 const generateRandomNumber = (min, max, exclude) => {
 	min = Math.ceil(min);
@@ -17,7 +18,7 @@ const generateRandomNumber = (min, max, exclude) => {
 	return random;
 };
 
-const GameScreen = ({ style, gameNumber, onClickEndGame, onGameOver }) => {
+const GameScreen = ({ gameNumber, onClickEndGame, onGameOver }) => {
 	const [numTries, setNumTries] = useState(0);
 	const [lastGuess, setLastGuess] = useState(
 		generateRandomNumber(1, 100, gameNumber)
@@ -65,14 +66,12 @@ const GameScreen = ({ style, gameNumber, onClickEndGame, onGameOver }) => {
 	};
 
 	return (
-		<View style={(style, styles.screen)}>
-			<Text
-				style={(style, ThemeStyles.text)}
-			>{`Press LOWER or HIGHER buttons\n        to give the robot clues.`}</Text>
-			<Card style={(style, styles.card)}>
-				<Text style={(style, ThemeStyles.text)}>Robot Guess is</Text>
-				<View style={(style, styles.guessClueLayout)}>
-					<View style={(style, ThemeStyles.buttonWrapperSmall)}>
+		<View style={styles.screen}>
+			<ThemeText>{`Press LOWER or HIGHER buttons\n        to give the robot clues.`}</ThemeText>
+			<Card style={styles.card}>
+				<ThemeText>Robot Guess is</ThemeText>
+				<View style={styles.guessClueLayout}>
+					<View style={ThemeStyles.buttonWrapperSmall}>
 						<Button
 							title="LOWER"
 							onPress={guessLower}
@@ -80,7 +79,7 @@ const GameScreen = ({ style, gameNumber, onClickEndGame, onGameOver }) => {
 						/>
 					</View>
 					<NumberContainer>{lastGuess}</NumberContainer>
-					<View style={(style, ThemeStyles.buttonWrapperSmall)}>
+					<View style={ThemeStyles.buttonWrapperSmall}>
 						<Button
 							title="HIGHER"
 							onPress={guessHigher}

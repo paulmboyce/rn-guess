@@ -2,12 +2,13 @@ import React, { useState, Fragment } from "react";
 import {
 	View,
 	StyleSheet,
-	Text,
 	Button,
 	TouchableWithoutFeedback,
 	Keyboard,
 	Alert,
 } from "react-native";
+
+import { ThemeText, ThemeTextBold } from "../components/themed";
 
 import { Theme, ThemeStyles } from "../themes";
 import Card from "../components/Card";
@@ -51,7 +52,7 @@ const StartGameScreen = (props) => {
 	const showInputBox = () => {
 		return (
 			<Fragment>
-				<Text style={ThemeStyles.text}>Enter a number:</Text>
+				<ThemeTextBold>Enter a number:</ThemeTextBold>
 				<Input
 					blurOnSubmit
 					autoCapitalize="none"
@@ -90,9 +91,9 @@ const StartGameScreen = (props) => {
 	const showStartButton = () => {
 		return (
 			<Fragment>
-				<Text style={(props.style, ThemeStyles.text)}>You selected:</Text>
+				<ThemeText>You selected:</ThemeText>
 				<NumberContainer>{selectedValue}</NumberContainer>
-				<View style={(props.style, styles.buttonLayout)}>
+				<View style={styles.buttonLayout}>
 					<Button
 						title="Start Game"
 						color={Theme.primaryColor}
@@ -108,10 +109,10 @@ const StartGameScreen = (props) => {
 
 	return (
 		<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-			<View style={(props.style, styles.screen)}>
-				<Text style={(props.style, ThemeStyles.title)}>Start a New Game!</Text>
+			<View style={styles.screen}>
+				<ThemeText style={ThemeStyles.title}>Start a New Game!</ThemeText>
 
-				<Card style={(props.style, { ...styles.inputContainer })}>
+				<Card style={styles.inputContainer}>
 					{!confirmed && showInputBox()}
 					{!confirmed && showConfirmResetButtons()}
 					{confirmed && showStartButton()}

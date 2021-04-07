@@ -1,19 +1,20 @@
 import React from "react";
-import { View, StyleSheet, Text, Button } from "react-native";
+import { View, StyleSheet, Button } from "react-native";
 
 import { Theme, ThemeStyles } from "../themes";
+import { ThemeText } from "../components/themed";
 
-const GameOverScreen = ({ style, numTries, onClickNewGame }) => {
+const GameOverScreen = ({ numTries, onClickNewGame }) => {
 	return (
-		<View style={(style, styles.screen)}>
-			<View style={(style, { flex: 1, justifyContent: "center" })}>
-				<Text style={(style, ThemeStyles.title)}>
+		<View style={styles.screen}>
+			<View style={{ flex: 1, justifyContent: "center" }}>
+				<ThemeText style={ThemeStyles.title}>
 					Game Over in {numTries} rounds!
-				</Text>
+				</ThemeText>
 			</View>
-			<View style={(style, { flex: 2, alignItems: "center" })}>
-				<Text style={(style, ThemeStyles.text)}>Want to play again?</Text>
-				<View style={(style, { paddingTop: 20 })}>
+			<View style={{ flex: 2, alignItems: "center" }}>
+				<ThemeText>Want to play again?</ThemeText>
+				<View style={{ paddingTop: 20 }}>
 					<Button
 						onPress={onClickNewGame}
 						title="PLAY AGAIN"

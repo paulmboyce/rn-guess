@@ -1,12 +1,13 @@
 import React from "react";
-import { View, Text, StyleSheet, Platform } from "react-native";
+import { View, StyleSheet, Platform } from "react-native";
 
 import { Theme } from "../themes";
+import { ThemeTextBold } from "../components/themed";
 
-const Header = ({ title, style }) => {
+const Header = ({ title }) => {
 	return (
-		<View style={(style, styles.header)}>
-			<Text style={(style, styles.title)}>{title}</Text>
+		<View style={styles.header}>
+			<ThemeTextBold style={styles.text}>{title}</ThemeTextBold>
 		</View>
 	);
 };
@@ -22,11 +23,9 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 		alignItems: "center",
 	},
-	title: {
+	text: {
 		color: "white",
-		fontFamily: Theme.fontFamilyBold,
 		fontSize: 24,
-		paddingHorizontal: 10,
 	},
 });
 
