@@ -29,9 +29,24 @@ const ThemeTextTitle = (props) => {
 	);
 };
 
+const ThemeTextHighlight = (props) => {
+	const style = { color: Theme.primaryColor, ...props.style };
+	return (
+		<ThemeTextBold {...props} style={style}>
+			{props.children}
+		</ThemeTextBold>
+	);
+};
+
 const ThemeInput = (props) => {
 	const style = { ...ThemeStyles.input, ...props.style };
 	return <TextInput {...props} style={style} />;
 };
 
-export { ThemeText, ThemeTextBold, ThemeTextTitle, ThemeInput };
+export {
+	ThemeText,
+	ThemeTextBold,
+	ThemeTextTitle,
+	ThemeTextHighlight,
+	ThemeInput,
+};

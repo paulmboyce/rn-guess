@@ -2,7 +2,11 @@ import React from "react";
 import { View, StyleSheet, Button, Image } from "react-native";
 
 import { Theme, ThemeStyles } from "../themes";
-import { ThemeText, ThemeTextTitle } from "../components/themed";
+import {
+	ThemeText,
+	ThemeTextTitle,
+	ThemeTextHighlight,
+} from "../components/themed";
 
 const GameOverScreen = ({ numTries, onClickNewGame }) => {
 	return (
@@ -14,7 +18,10 @@ const GameOverScreen = ({ numTries, onClickNewGame }) => {
 						source={require("../assets/summit.png")}
 					/>
 				</View>
-				<ThemeTextTitle>Game over in {numTries} rounds!</ThemeTextTitle>
+				<ThemeTextTitle>
+					Game over in <ThemeTextHighlight>{numTries}</ThemeTextHighlight>{" "}
+					rounds!
+				</ThemeTextTitle>
 			</View>
 			<View style={ThemeStyles.box1}>
 				<ThemeText>Want to play again?</ThemeText>
