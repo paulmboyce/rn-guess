@@ -77,4 +77,22 @@ export const ThemeStyles = StyleSheet.create({
 		borderColor: Theme.borderColor,
 		borderRadius: 2,
 	},
+	screen: {
+		flex: 1,
+		width: "100%",
+		padding: 10,
+		justifyContent: "flex-start",
+		alignItems: "center",
+		backgroundColor: Theme.backgroundColor,
+	},
+	box1: {
+		flex: 1,
+		justifyContent: "center",
+		alignItems: "center",
+	},
+	box2: {
+		flex: 2,
+		justifyContent: "center",
+		alignItems: "center",
+	},
 });

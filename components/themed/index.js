@@ -20,9 +20,18 @@ const ThemeTextBold = (props) => {
 	);
 };
 
+const ThemeTextTitle = (props) => {
+	const style = { ...ThemeStyles.title, ...props.style };
+	return (
+		<ThemeText {...props} style={style}>
+			{props.children}
+		</ThemeText>
+	);
+};
+
 const ThemeInput = (props) => {
 	const style = { ...ThemeStyles.input, ...props.style };
 	return <TextInput {...props} style={style} />;
 };
 
-export { ThemeText, ThemeTextBold, ThemeInput };
+export { ThemeText, ThemeTextBold, ThemeTextTitle, ThemeInput };

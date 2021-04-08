@@ -8,7 +8,7 @@ import {
 	Alert,
 } from "react-native";
 
-import { ThemeText, ThemeInput } from "../components/themed";
+import { ThemeText, ThemeTextTitle, ThemeInput } from "../components/themed";
 import { Theme, ThemeStyles } from "../themes";
 import Card from "../components/Card";
 import NumberContainer from "../components/NumberContainer";
@@ -107,8 +107,8 @@ const StartGameScreen = (props) => {
 
 	return (
 		<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-			<View style={styles.screen}>
-				<ThemeText style={ThemeStyles.title}>Start a New Game!</ThemeText>
+			<View style={ThemeStyles.screen}>
+				<ThemeTextTitle>Start a New Game!</ThemeTextTitle>
 
 				<Card style={styles.inputContainer}>
 					{!confirmed && showInputBox()}
@@ -121,14 +121,6 @@ const StartGameScreen = (props) => {
 };
 
 const styles = StyleSheet.create({
-	screen: {
-		flex: 1,
-		width: "100%",
-		padding: 10,
-		alignItems: "center",
-		backgroundColor: Theme.backgroundColor,
-	},
-
 	inputContainer: {
 		width: 330,
 		maxWidth: "80%",

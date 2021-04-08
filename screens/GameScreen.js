@@ -66,46 +66,44 @@ const GameScreen = ({ gameNumber, onClickEndGame, onGameOver }) => {
 	};
 
 	return (
-		<View style={styles.screen}>
-			<ThemeText>{`Press LOWER or HIGHER buttons\n        to give the robot clues.`}</ThemeText>
-			<Card style={styles.card}>
-				<ThemeText>Robot Guess is</ThemeText>
-				<View style={styles.guessClueLayout}>
-					<View style={ThemeStyles.buttonWrapperSmall}>
-						<Button
-							title="LOWER"
-							onPress={guessLower}
-							color={Theme.primaryColor}
-						/>
+		<View style={ThemeStyles.screen}>
+			<View style={ThemeStyles.box1}>
+				<ThemeText>{`Press LOWER or HIGHER buttons\n        to give the robot clues.`}</ThemeText>
+			</View>
+			<View style={ThemeStyles.box1}>
+				<Card style={styles.card}>
+					<ThemeText>Robot Guess is</ThemeText>
+					<View style={styles.guessClueLayout}>
+						<View style={ThemeStyles.buttonWrapperSmall}>
+							<Button
+								title="LOWER"
+								onPress={guessLower}
+								color={Theme.primaryColor}
+							/>
+						</View>
+						<NumberContainer>{lastGuess}</NumberContainer>
+						<View style={ThemeStyles.buttonWrapperSmall}>
+							<Button
+								title="HIGHER"
+								onPress={guessHigher}
+								color={Theme.primaryColor}
+							/>
+						</View>
 					</View>
-					<NumberContainer>{lastGuess}</NumberContainer>
-					<View style={ThemeStyles.buttonWrapperSmall}>
-						<Button
-							title="HIGHER"
-							onPress={guessHigher}
-							color={Theme.primaryColor}
-						/>
-					</View>
-				</View>
-			</Card>
-			<Button
-				onPress={onClickEndGame}
-				title="End Game"
-				color={Theme.secondaryColor}
-			/>
+				</Card>
+			</View>
+			<View style={ThemeStyles.box2}>
+				<Button
+					onPress={onClickEndGame}
+					title="End Game"
+					color={Theme.secondaryColor}
+				/>
+			</View>
 		</View>
 	);
 };
 
 const styles = StyleSheet.create({
-	screen: {
-		flex: 1,
-		padding: 10,
-		width: "100%",
-		justifyContent: "space-evenly",
-		alignItems: "center",
-		backgroundColor: Theme.backgroundColor,
-	},
 	guessClueLayout: {
 		width: "80%",
 		flexDirection: "row",
