@@ -10,8 +10,8 @@ const _fetchFonts = async () => {
 };
 
 const _cacheImagesAsync = async () => {
-	const images = [require("../assets/favicon.png")];
-	console.log("Loading images to cache...");
+	const images = [require("../assets/summit.png")];
+	console.log("Pre-loading images...");
 	const cacheImages = images.map((image) => {
 		return Asset.fromModule(image).downloadAsync();
 	});

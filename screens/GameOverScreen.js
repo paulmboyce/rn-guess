@@ -14,7 +14,7 @@ const GameOverScreen = ({ numTries, onClickNewGame }) => {
 						source={require("../assets/summit.png")}
 					/>
 				</View>
-				<ThemeTextTitle>Game Over in {numTries} rounds!</ThemeTextTitle>
+				<ThemeTextTitle>Game over in {numTries} rounds!</ThemeTextTitle>
 			</View>
 			<View style={ThemeStyles.box1}>
 				<ThemeText>Want to play again?</ThemeText>
@@ -42,8 +42,8 @@ const styles = StyleSheet.create({
 	},
 	image: {
 		width: "100%",
-		height: "100%",
-		resizeMode: "stretch",
+		height: "105%",
+		resizeMode: "cover",
 	},
 });
 export default GameOverScreen;
