@@ -1,12 +1,13 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 
 import { Theme } from "../themes";
+import { ThemeTextBold } from "../components/themed";
 
 const NumberContainer = (props) => {
 	return (
 		<View style={styles.container}>
-			<Text style={styles.text}>{props.children}</Text>
+			<ThemeTextBold style={styles.text}>{props.children}</ThemeTextBold>
 		</View>
 	);
 };
@@ -22,7 +23,6 @@ const styles = StyleSheet.create({
 		borderRadius: 10,
 	},
 	text: {
-		fontFamily: Theme.fontFamilyBold,
 		fontSize: 26,
 		color: Theme.secondaryColor,
 	},
