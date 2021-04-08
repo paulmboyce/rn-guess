@@ -6,7 +6,7 @@ import Header from "./components/Header";
 import StartGameScreen from "./screens/StartGameScreen";
 import GameScreen from "./screens/GameScreen";
 import GameOverScreen from "./screens/GameOverScreen";
-import initAssetsThemeStylesAsync from "./utils/loadAssetsAsync";
+import loadAssetsAsync from "./utils/loadAssetsAsync";
 
 function App() {
 	const [isAppReady, setIsAppReady] = useState(false);
@@ -18,7 +18,7 @@ function App() {
 	if (!isAppReady) {
 		return (
 			<AppLoading
-				startAsync={initAssetsThemeStylesAsync}
+				startAsync={loadAssetsAsync}
 				onFinish={() => {
 					console.log("Finished loading resources. Starting app... ");
 					setIsAppReady(true);

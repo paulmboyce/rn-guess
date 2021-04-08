@@ -18,7 +18,7 @@ const _cacheImagesAsync = async () => {
 	return Promise.all(cacheImages);
 };
 
-const initAssetsThemeStylesAsync = async () => {
+const loadAssetsAsync = async () => {
 	try {
 		await _cacheImagesAsync();
 		await _fetchFonts();
@@ -27,4 +27,4 @@ const initAssetsThemeStylesAsync = async () => {
 	}
 };
 
-export default initAssetsThemeStylesAsync;
+export default loadAssetsAsync;
