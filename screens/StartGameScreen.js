@@ -8,11 +8,9 @@ import {
 	Alert,
 } from "react-native";
 
-import { ThemeText } from "../components/themed";
-
+import { ThemeText, ThemeInput } from "../components/themed";
 import { Theme, ThemeStyles } from "../themes";
 import Card from "../components/Card";
-import Input from "../components/Input";
 import NumberContainer from "../components/NumberContainer";
 
 const StartGameScreen = (props) => {
@@ -53,7 +51,7 @@ const StartGameScreen = (props) => {
 		return (
 			<Fragment>
 				<ThemeText>Enter a number:</ThemeText>
-				<Input
+				<ThemeInput
 					blurOnSubmit
 					autoCapitalize="none"
 					autoCorrect={false}
@@ -139,12 +137,10 @@ const styles = StyleSheet.create({
 		paddingVertical: 40,
 	},
 	inputField: {
-		borderWidth: 1,
 		width: "18%",
 		textAlign: "center",
-		fontSize: 18,
 		fontFamily: Theme.fontFamilyBold,
-		color: Theme.fontColor,
+		color: Theme.secondaryColor,
 	},
 	buttonLayout: {
 		flexDirection: "row",

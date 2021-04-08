@@ -66,4 +66,15 @@ export const ThemeStyles = StyleSheet.create({
 		fontFamily: Theme.fontFamily,
 		color: Theme.fontColor,
 	},
+	input: {
+		borderWidth: 1,
+		margin: 10,
+		paddingHorizontal: 6,
+		height: 35,
+		fontSize: 18,
+		fontFamily: Theme.fontFamily,
+		color: Theme.fontColor,
+		borderColor: Theme.borderColor,
+		borderRadius: 2,
+	},
 });

@@ -1,21 +1,28 @@
 import React from "react";
-import { Text } from "react-native";
+import { Text, TextInput } from "react-native";
 import { Theme, ThemeStyles } from "../../themes";
 
 const ThemeText = (props) => {
+	const style = { ...ThemeStyles.text, ...props.style };
 	return (
-		<Text style={{ ...ThemeStyles.text, ...props.style }}>
+		<Text {...props} style={style}>
 			{props.children}
 		</Text>
 	);
 };
 
 const ThemeTextBold = (props) => {
+	const style = { fontFamily: Theme.fontFamilyBold, ...props.style };
 	return (
-		<ThemeText style={{ fontFamily: Theme.fontFamilyBold, ...props.style }}>
+		<ThemeText {...props} style={style}>
 			{props.children}
 		</ThemeText>
 	);
 };
 
-export { ThemeText, ThemeTextBold };
+const ThemeInput = (props) => {
+	const style = { ...ThemeStyles.input, ...props.style };
+	return <TextInput {...props} style={style} />;
+};
+
+export { ThemeText, ThemeTextBold, ThemeInput };
