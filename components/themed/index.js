@@ -1,6 +1,6 @@
 import React from "react";
 import { Text } from "react-native";
-import { ThemeStyles } from "../../themes";
+import { Theme, ThemeStyles } from "../../themes";
 
 const ThemeText = (props) => {
 	return (

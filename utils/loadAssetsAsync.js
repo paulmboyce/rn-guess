@@ -9,16 +9,6 @@ const _fetchFonts = async () => {
 	});
 };
 
-const _fetchTheme = async () => {
-	console.log("Loading theme...");
-	try {
-		const result = await import("../themes");
-		Theme = result.Theme;
-	} catch (err) {
-		console.log("OOPS.. problem loading resources (theme)", err);
-	}
-};
-
 const _cacheImagesAsync = async () => {
 	const images = [require("../assets/favicon.png")];
 	console.log("Loading images to cache...");
@@ -32,7 +22,6 @@ const initAssetsThemeStylesAsync = async () => {
 	try {
 		await _cacheImagesAsync();
 		await _fetchFonts();
-		await _fetchTheme();
 	} catch (err) {
 		console.log("OOPS, problem loading assets.. ", err);
 	}
