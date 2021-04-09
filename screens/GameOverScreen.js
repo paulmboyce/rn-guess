@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, Button, Image } from "react-native";
+import { View, StyleSheet, Image } from "react-native";
 
 import { Theme, ThemeStyles } from "../themes";
 import {
@@ -7,6 +7,7 @@ import {
 	ThemeTextTitle,
 	ThemeTextHighlight,
 } from "../components/themed";
+import ButtonPrimary from "../components/ButtonPrimary";
 
 const GameOverScreen = ({ numTries, onClickNewGame }) => {
 	return (
@@ -24,13 +25,9 @@ const GameOverScreen = ({ numTries, onClickNewGame }) => {
 				</ThemeTextTitle>
 			</View>
 			<View style={ThemeStyles.box1}>
-				<ThemeText>Want to play again?</ThemeText>
+				<ThemeText style={styles.text}>Want to play again?</ThemeText>
 				<View style={{ paddingTop: 20 }}>
-					<Button
-						onPress={onClickNewGame}
-						title="PLAY AGAIN"
-						color={Theme.primaryColor}
-					/>
+					<ButtonPrimary onPress={onClickNewGame} title="PLAY AGAIN" />
 				</View>
 			</View>
 		</View>
@@ -51,6 +48,9 @@ const styles = StyleSheet.create({
 		width: "100%",
 		height: "105%",
 		resizeMode: "cover",
+	},
+	text: {
+		fontSize: 18,
 	},
 });
 export default GameOverScreen;

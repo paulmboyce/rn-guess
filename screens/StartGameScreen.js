@@ -2,7 +2,6 @@ import React, { useState, Fragment } from "react";
 import {
 	View,
 	StyleSheet,
-	Button,
 	TouchableWithoutFeedback,
 	Keyboard,
 	Alert,
@@ -12,6 +11,8 @@ import { ThemeText, ThemeTextTitle, ThemeInput } from "../components/themed";
 import { Theme, ThemeStyles } from "../themes";
 import Card from "../components/Card";
 import NumberContainer from "../components/NumberContainer";
+import ButtonPrimary from "../components/ButtonPrimary";
+import ButtonSecondary from "../components/ButtonSecondary";
 
 const StartGameScreen = (props) => {
 	const [enteredValue, setEnteredValue] = useState("");
@@ -69,18 +70,10 @@ const StartGameScreen = (props) => {
 		return (
 			<View style={styles.buttonLayout}>
 				<View style={styles.buttonWrapper}>
-					<Button
-						title="Reset"
-						color={Theme.secondaryColor}
-						onPress={resetInputHandler}
-					/>
+					<ButtonSecondary title="Reset" onPress={resetInputHandler} />
 				</View>
 				<View style={styles.buttonWrapper}>
-					<Button
-						title="Confirm"
-						color={Theme.primaryColor}
-						onPress={confirmInputHander}
-					/>
+					<ButtonPrimary title="Confirm" onPress={confirmInputHander} />
 				</View>
 			</View>
 		);
@@ -92,9 +85,8 @@ const StartGameScreen = (props) => {
 				<ThemeText>You selected:</ThemeText>
 				<NumberContainer>{selectedValue}</NumberContainer>
 				<View style={styles.buttonLayout}>
-					<Button
+					<ButtonPrimary
 						title="Start Game"
-						color={Theme.primaryColor}
 						onPress={() => {
 							console.log("START!");
 							props.onStartGame(selectedValue);

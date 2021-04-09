@@ -95,4 +95,17 @@ export const ThemeStyles = StyleSheet.create({
 		justifyContent: "center",
 		alignItems: "center",
 	},
+	buttonContainer: {
+		justifyContent: "center",
+		alignItems: "center",
+		backgroundColor: Theme.primaryColor,
+		fontFamily: Theme.fontFamily,
+		padding: 8,
+		borderRadius: 5,
+		overflow: "hidden",
+	},
+	button: {
+		fontSize: 18,
+		color: "white",
+	},
 });

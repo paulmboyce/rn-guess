@@ -1,10 +1,12 @@
-import React, { useState, Fragment, useEffect, useRef } from "react";
-import { View, StyleSheet, Button, Alert } from "react-native";
+import React, { useState, useEffect, useRef } from "react";
+import { View, StyleSheet, Alert } from "react-native";
 
 import { Theme, ThemeStyles } from "../themes";
 import NumberContainer from "../components/NumberContainer";
 import Card from "../components/Card";
 import { ThemeText } from "../components/themed";
+import ButtonPrimary from "../components/ButtonPrimary";
+import ButtonSecondary from "../components/ButtonSecondary";
 
 const generateRandomNumber = (min, max, exclude) => {
 	min = Math.ceil(min);
@@ -68,32 +70,26 @@ const GameScreen = ({ gameNumber, onClickEndGame, onGameOver }) => {
 	return (
 		<View style={ThemeStyles.screen}>
 			<View style={ThemeStyles.box1}>
-				<ThemeText>{`Press LOWER or HIGHER buttons\n        to give the robot clues.`}</ThemeText>
+				<ThemeText style={styles.howToPlay}>
+					Press LOWER or HIGHER buttons to give the robot clues.
+				</ThemeText>
 			</View>
 			<View style={ThemeStyles.box1}>
 				<Card style={styles.card}>
 					<ThemeText>Robot Guess is</ThemeText>
 					<View style={styles.guessClueLayout}>
 						<View style={ThemeStyles.buttonWrapperSmall}>
-							<Button
-								title="LOWER"
-								onPress={guessLower}
-								color={Theme.primaryColor}
-							/>
+							<ButtonPrimary title="LOWER" onPress={guessLower} />
 						</View>
 						<NumberContainer>{lastGuess}</NumberContainer>
 						<View style={ThemeStyles.buttonWrapperSmall}>
-							<Button
-								title="HIGHER"
-								onPress={guessHigher}
-								color={Theme.primaryColor}
-							/>
+							<ButtonPrimary title="HIGHER" onPress={guessHigher} />
 						</View>
 					</View>
 				</Card>
 			</View>
 			<View style={ThemeStyles.box2}>
-				<Button
+				<ButtonSecondary
 					onPress={onClickEndGame}
 					title="End Game"
 					color={Theme.secondaryColor}
@@ -113,6 +109,11 @@ const styles = StyleSheet.create({
 	card: {
 		maxWidth: "80%",
 		padding: 10,
+	},
+	howToPlay: {
+		fontSize: 18,
+		textAlign: "center",
+		paddingHorizontal: 50,
 	},
 });
 
