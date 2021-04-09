@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { View, StyleSheet, Alert } from "react-native";
+import { AntDesign } from "@expo/vector-icons";
 
 import { Theme, ThemeStyles } from "../themes";
 import NumberContainer from "../components/NumberContainer";
@@ -79,11 +80,15 @@ const GameScreen = ({ gameNumber, onClickEndGame, onGameOver }) => {
 					<ThemeText>Robot Guess is</ThemeText>
 					<View style={styles.guessClueLayout}>
 						<View style={ThemeStyles.buttonWrapperSmall}>
-							<ButtonPrimary title="LOWER" onPress={guessLower} />
+							<ButtonPrimary title="LOWER" onPress={guessLower}>
+								<AntDesign name="caretdown" size={22} />
+							</ButtonPrimary>
 						</View>
 						<NumberContainer>{lastGuess}</NumberContainer>
 						<View style={ThemeStyles.buttonWrapperSmall}>
-							<ButtonPrimary title="HIGHER" onPress={guessHigher} />
+							<ButtonPrimary title="HIGHER" onPress={guessHigher}>
+								<AntDesign name="caretup" size={22} />
+							</ButtonPrimary>
 						</View>
 					</View>
 				</Card>

@@ -5,7 +5,7 @@ import { ThemeText } from "./themed";
 import { Theme, ThemeStyles } from "../themes";
 
 const ButtonSecondary = (props) => {
-	const content = props.title || "";
+	const content = props.children || props.title || "";
 	return (
 		<TouchableOpacity {...props}>
 			<View

@@ -5,7 +5,7 @@ import { ThemeText } from "./themed";
 import { ThemeStyles } from "../themes";
 
 const ButtonPrimary = (props) => {
-	const content = props.title || "";
+	const content = props.children || props.title || "";
 	return (
 		<TouchableOpacity {...props}>
 			<View style={{ ...ThemeStyles.buttonContainer, ...props.style }}>

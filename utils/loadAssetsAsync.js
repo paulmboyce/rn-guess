@@ -1,11 +1,21 @@
 import * as Font from "expo-font";
 import { Asset } from "expo-asset";
+import {
+	FontAwesome,
+	MaterialIcons,
+	Ionicons,
+	AntDesign,
+} from "@expo/vector-icons";
 
 const _fetchFonts = async () => {
 	console.log("Loading fonts...");
 	return Font.loadAsync({
 		"open-sans": require("../assets/fonts/OpenSans-Regular.ttf"),
 		"open-sans-bold": require("../assets/fonts/OpenSans-Bold.ttf"),
+		...FontAwesome.font,
+		...MaterialIcons.font,
+		...Ionicons.font,
+		...AntDesign.font,
 	});
 };
 

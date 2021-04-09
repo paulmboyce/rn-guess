@@ -54,7 +54,7 @@ export const ThemeStyles = StyleSheet.create({
 	},
 	buttonWrapperSmall: {
 		marginHorizontal: 4,
-		minWidth: "25%",
+		minWidth: "30%",
 	},
 	title: {
 		fontSize: 22,
