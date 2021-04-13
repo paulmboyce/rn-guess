@@ -26,6 +26,7 @@ const GameScreen = ({ gameNumber, onClickEndGame, onGameOver }) => {
 	const [lastGuess, setLastGuess] = useState(
 		generateRandomNumber(1, 100, gameNumber)
 	);
+	const [guesses, setGuesses] = useState([]);
 
 	const minGuess = useRef(0);
 	const maxGuess = useRef(100);
@@ -33,6 +34,17 @@ const GameScreen = ({ gameNumber, onClickEndGame, onGameOver }) => {
 	useEffect(() => {
 		checkForWin();
 	});
+
+	useEffect(() => {
+		updateGuessStats(lastGuess);
+	}, [lastGuess]);
+
+	const updateGuessStats = (lastGuess) => {
+		console.log("Updating GuessStats..");
+		setNumTries((currentNumTries) => currentNumTries + 1);
+		setGuesses((currentGuesses) => [lastGuess, ...currentGuesses]);
+		guesses.map((guess) => console.log("Guessed: ", guess));
+	};
 
 	const checkForWin = () => {
 		if (gameNumber === lastGuess) {
@@ -54,7 +66,6 @@ const GameScreen = ({ gameNumber, onClickEndGame, onGameOver }) => {
 		const top = Math.min(maxGuess.current, lastGuess);
 		maxGuess.current = top;
 		setLastGuess(generateRandomNumber(minGuess.current, top, lastGuess));
-		setNumTries((numTries) => numTries + 1);
 	};
 
 	const guessHigher = () => {
@@ -65,7 +76,6 @@ const GameScreen = ({ gameNumber, onClickEndGame, onGameOver }) => {
 		const bottom = Math.max(minGuess.current, lastGuess);
 		minGuess.current = bottom;
 		setLastGuess(generateRandomNumber(bottom, maxGuess.current, lastGuess));
-		setNumTries((numTries) => numTries + 1);
 	};
 
 	return (
