@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
-import { View, StyleSheet, Alert } from "react-native";
+import { View, StyleSheet, Alert, ScrollView } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
 import { Theme, ThemeStyles } from "../themes";
 import NumberContainer from "../components/NumberContainer";
 import Card from "../components/Card";
-import { ThemeText } from "../components/themed";
+import { ThemeText, ThemeTextHighlight } from "../components/themed";
 import ButtonPrimary from "../components/ButtonPrimary";
 import ButtonSecondary from "../components/ButtonSecondary";
 
@@ -21,8 +21,17 @@ const generateRandomNumber = (min, max, exclude) => {
 	return random;
 };
 
+const renderListItem = (value, index) => {
+	return (
+		<View style={styles.listItem} key={Math.random()}>
+			<ThemeTextHighlight>
+				Guess #{index} - {value}
+			</ThemeTextHighlight>
+		</View>
+	);
+};
+
 const GameScreen = ({ gameNumber, onClickEndGame, onGameOver }) => {
-	const [numTries, setNumTries] = useState(0);
 	const [lastGuess, setLastGuess] = useState(
 		generateRandomNumber(1, 100, gameNumber)
 	);
@@ -36,20 +45,14 @@ const GameScreen = ({ gameNumber, onClickEndGame, onGameOver }) => {
 	});
 
 	useEffect(() => {
-		updateGuessStats(lastGuess);
+		setGuesses((currentGuesses) => [...currentGuesses, lastGuess]);
 	}, [lastGuess]);
-
-	const updateGuessStats = (lastGuess) => {
-		console.log("Updating GuessStats..");
-		setNumTries((currentNumTries) => currentNumTries + 1);
-		setGuesses((currentGuesses) => [lastGuess, ...currentGuesses]);
-		guesses.map((guess) => console.log("Guessed: ", guess));
-	};
 
 	const checkForWin = () => {
 		if (gameNumber === lastGuess) {
 			console.log(`WIN! ${gameNumber} = ${lastGuess}`);
-			onGameOver(numTries);
+			setGuesses([]);
+			onGameOver(guesses.length);
 		}
 	};
 
@@ -103,7 +106,16 @@ const GameScreen = ({ gameNumber, onClickEndGame, onGameOver }) => {
 					</View>
 				</Card>
 			</View>
-			<View style={ThemeStyles.box2}>
+			<View style={ThemeStyles.box1}>
+				<ScrollView contentContainerStyle={styles.list}>
+					{guesses
+						.reverse()
+						.map((guess, index) =>
+							renderListItem(guess, guesses.length - index)
+						)}
+				</ScrollView>
+			</View>
+			<View style={ThemeStyles.box1}>
 				<ButtonSecondary
 					onPress={onClickEndGame}
 					title="End Game"
@@ -129,6 +141,18 @@ const styles = StyleSheet.create({
 		fontSize: 18,
 		textAlign: "center",
 		paddingHorizontal: 50,
+	},
+	list: {
+		marginTop: 20,
+		width: "100%",
+	},
+	listItem: {
+		marginTop: 1,
+		paddingHorizontal: 60,
+		paddingVertical: 5,
+		borderColor: Theme.borderColor,
+		borderWidth: Theme.borderWidth,
+		borderRadius: 3,
 	},
 });
 
