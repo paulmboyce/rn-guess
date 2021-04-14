@@ -47,7 +47,7 @@ const GameScreen = ({ gameNumber, onClickEndGame, onGameOver }) => {
 	useEffect(() => {
 		setGuesses((currentGuesses) => [
 			...currentGuesses,
-			{ id: Math.random(), value: lastGuess },
+			{ id: Math.random(), value: lastGuess.toString() },
 		]);
 	}, [lastGuess]);
 
