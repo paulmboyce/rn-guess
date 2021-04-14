@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { View, StyleSheet, Alert, ScrollView } from "react-native";
+import { View, StyleSheet, Alert, FlatList } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
 import { Theme, ThemeStyles } from "../themes";
@@ -21,11 +21,11 @@ const generateRandomNumber = (min, max, exclude) => {
 	return random;
 };
 
-const renderListItem = (value, index) => {
+const renderListItem = (numGuesses, { item, index }) => {
 	return (
-		<View style={styles.listItem} key={Math.random()}>
+		<View style={styles.listItem}>
 			<ThemeTextHighlight>
-				Guess #{index} - {value}
+				Guess #{numGuesses - index} - {item.value}
 			</ThemeTextHighlight>
 		</View>
 	);
@@ -45,8 +45,15 @@ const GameScreen = ({ gameNumber, onClickEndGame, onGameOver }) => {
 	});
 
 	useEffect(() => {
-		setGuesses((currentGuesses) => [...currentGuesses, lastGuess]);
+		setGuesses((currentGuesses) => [
+			...currentGuesses,
+			{ id: Math.random(), value: lastGuess },
+		]);
 	}, [lastGuess]);
+
+	const reversedGuesses = () => {
+		return guesses.reverse();
+	};
 
 	const checkForWin = () => {
 		if (gameNumber === lastGuess) {
@@ -107,16 +114,15 @@ const GameScreen = ({ gameNumber, onClickEndGame, onGameOver }) => {
 				</Card>
 			</View>
 			<View style={{ ...ThemeStyles.box1, width: "60%" }}>
-				<ScrollView
+				{/* The bind (below) passes guesses.length as the 1st param to
+				    renderListItem. The item passed by FlatList is 2nd param */}
+				<FlatList
 					horizontal={true}
 					contentContainerStyle={styles.scrollContainer}
-				>
-					{guesses
-						.reverse()
-						.map((guess, index) =>
-							renderListItem(guess, guesses.length - index)
-						)}
-				</ScrollView>
+					data={reversedGuesses()}
+					keyExtractor={(item) => item.id}
+					renderItem={renderListItem.bind(null, guesses.length)}
+				></FlatList>
 			</View>
 			<View style={ThemeStyles.box2}>
 				<ButtonSecondary
