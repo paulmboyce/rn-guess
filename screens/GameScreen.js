@@ -88,7 +88,7 @@ const GameScreen = ({ gameNumber, onClickEndGame, onGameOver }) => {
 					Press LOWER or HIGHER buttons to give the robot clues.
 				</ThemeText>
 			</View>
-			<View style={ThemeStyles.box1}>
+			<View style={ThemeStyles.box2}>
 				<Card style={styles.card}>
 					<ThemeText>Robot Guess is</ThemeText>
 					<View style={styles.guessClueLayout}>
@@ -106,8 +106,11 @@ const GameScreen = ({ gameNumber, onClickEndGame, onGameOver }) => {
 					</View>
 				</Card>
 			</View>
-			<View style={ThemeStyles.box1}>
-				<ScrollView contentContainerStyle={styles.list}>
+			<View style={{ ...ThemeStyles.box1, width: "60%" }}>
+				<ScrollView
+					horizontal={true}
+					contentContainerStyle={styles.scrollContainer}
+				>
 					{guesses
 						.reverse()
 						.map((guess, index) =>
@@ -115,7 +118,7 @@ const GameScreen = ({ gameNumber, onClickEndGame, onGameOver }) => {
 						)}
 				</ScrollView>
 			</View>
-			<View style={ThemeStyles.box1}>
+			<View style={ThemeStyles.box2}>
 				<ButtonSecondary
 					onPress={onClickEndGame}
 					title="End Game"
@@ -142,17 +145,20 @@ const styles = StyleSheet.create({
 		textAlign: "center",
 		paddingHorizontal: 50,
 	},
-	list: {
-		marginTop: 20,
-		width: "100%",
+	scrollContainer: {
+		flexGrow: 1,
+		marginTop: 40,
+		justifyContent: "center",
 	},
 	listItem: {
-		marginTop: 1,
+		height: 50,
+		marginRight: 3,
 		paddingHorizontal: 60,
 		paddingVertical: 5,
 		borderColor: Theme.borderColor,
 		borderWidth: Theme.borderWidth,
 		borderRadius: 3,
+		justifyContent: "center",
 	},
 });
 
