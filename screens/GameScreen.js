@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { View, StyleSheet, Alert, FlatList } from "react-native";
+import { View, StyleSheet, Alert, FlatList, Dimensions } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
 import { Theme, ThemeStyles } from "../themes";
@@ -21,6 +21,7 @@ const generateRandomNumber = (min, max, exclude) => {
 	return random;
 };
 
+let flatListRef;
 const renderListItem = (numGuesses, { item, index }) => {
 	return (
 		<View style={styles.listItem}>
@@ -76,6 +77,7 @@ const GameScreen = ({ gameNumber, onClickEndGame, onGameOver }) => {
 		const top = Math.min(maxGuess.current, lastGuess);
 		maxGuess.current = top;
 		setLastGuess(generateRandomNumber(minGuess.current, top, lastGuess));
+		flatListRef.scrollToIndex({ animated: true, index: 0 });
 	};
 
 	const guessHigher = () => {
@@ -86,15 +88,14 @@ const GameScreen = ({ gameNumber, onClickEndGame, onGameOver }) => {
 		const bottom = Math.max(minGuess.current, lastGuess);
 		minGuess.current = bottom;
 		setLastGuess(generateRandomNumber(bottom, maxGuess.current, lastGuess));
+		flatListRef.scrollToIndex({ animated: true, index: 0 });
 	};
 
 	return (
 		<View style={ThemeStyles.screen}>
-			<View style={ThemeStyles.box1}>
-				<ThemeText style={styles.howToPlay}>
-					Press LOWER or HIGHER buttons to give the robot clues.
-				</ThemeText>
-			</View>
+			<ThemeText style={styles.howToPlay}>
+				Press DOWN or UP button to give the robot clues.
+			</ThemeText>
 			<View style={ThemeStyles.box2}>
 				<Card style={styles.card}>
 					<ThemeText>Robot Guess is</ThemeText>
@@ -113,7 +114,12 @@ const GameScreen = ({ gameNumber, onClickEndGame, onGameOver }) => {
 					</View>
 				</Card>
 			</View>
-			<View style={{ ...ThemeStyles.box1, width: "60%" }}>
+			<View
+				style={{
+					...ThemeStyles.box1,
+					width: Dimensions.get("window").width * 0.6,
+				}}
+			>
 				{/* The bind (below) passes guesses.length as the 1st param to
 				    renderListItem. The item passed by FlatList is 2nd param */}
 				<FlatList
@@ -122,9 +128,12 @@ const GameScreen = ({ gameNumber, onClickEndGame, onGameOver }) => {
 					data={reversedGuesses()}
 					keyExtractor={(item) => item.id}
 					renderItem={renderListItem.bind(null, guesses.length)}
+					ref={(ref) => {
+						flatListRef = ref;
+					}}
 				></FlatList>
 			</View>
-			<View style={ThemeStyles.box2}>
+			<View style={ThemeStyles.box1}>
 				<ButtonSecondary
 					onPress={onClickEndGame}
 					title="End Game"
@@ -137,7 +146,6 @@ const GameScreen = ({ gameNumber, onClickEndGame, onGameOver }) => {
 
 const styles = StyleSheet.create({
 	guessClueLayout: {
-		width: "80%",
 		flexDirection: "row",
 		justifyContent: "center",
 		alignItems: "center",
@@ -147,9 +155,10 @@ const styles = StyleSheet.create({
 		padding: 10,
 	},
 	howToPlay: {
-		fontSize: 18,
+		fontSize: 16,
 		textAlign: "center",
 		paddingHorizontal: 50,
+		paddingVertical: 20,
 	},
 	scrollContainer: {
 		flexGrow: 1,
@@ -157,14 +166,15 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 	},
 	listItem: {
-		height: 50,
-		marginRight: 3,
-		paddingHorizontal: 60,
-		paddingVertical: 5,
+		justifyContent: "center",
+		alignItems: "center",
+		width: Dimensions.get("window").width * 0.55,
+		maxHeight: 40,
+		marginBottom: 20,
+		marginRight: 2,
 		borderColor: Theme.borderColor,
 		borderWidth: Theme.borderWidth,
 		borderRadius: 3,
-		justifyContent: "center",
 	},
 });
 

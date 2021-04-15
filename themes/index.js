@@ -84,7 +84,7 @@ export const ThemeStyles = StyleSheet.create({
 	screen: {
 		flex: 1,
 		width: "100%",
-		padding: 10,
+		padding: 5,
 		justifyContent: "flex-start",
 		alignItems: "center",
 		backgroundColor: Theme.backgroundColor,

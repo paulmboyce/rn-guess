@@ -5,7 +5,6 @@ import { ThemeStyles } from "../themes";
 import { render } from "react-dom";
 
 const Card = ({ style, children }) => {
-	console.log("RENDER: Card");
 	return (
 		<View
 			style={{
