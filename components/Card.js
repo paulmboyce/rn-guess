@@ -1,9 +1,11 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Dimensions } from "react-native";
 
 import { ThemeStyles } from "../themes";
+import { render } from "react-dom";
 
 const Card = ({ style, children }) => {
+	console.log("RENDER: Card");
 	return (
 		<View
 			style={{
@@ -19,8 +21,10 @@ const Card = ({ style, children }) => {
 
 const styles = StyleSheet.create({
 	default: {
-		width: 300,
-		maxWidth: "80%",
+		marginVertical: 10,
+		width: Dimensions.get("window").width * 0.8,
+		minHeight: Dimensions.get("window").height * 0.3,
+		justifyContent: "center",
 		alignItems: "center",
 		padding: 20,
 	},

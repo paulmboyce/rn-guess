@@ -5,6 +5,7 @@ import {
 	TouchableWithoutFeedback,
 	Keyboard,
 	Alert,
+	Dimensions,
 } from "react-native";
 
 import { ThemeText, ThemeTextTitle, ThemeInput } from "../components/themed";
@@ -48,9 +49,9 @@ const StartGameScreen = (props) => {
 		setConfirmed(true);
 	};
 
-	const showInputBox = () => {
+	const showInputForm = () => {
 		return (
-			<Fragment>
+			<Card style={styles.cardStyle}>
 				<ThemeText>Enter a number:</ThemeText>
 				<ThemeInput
 					blurOnSubmit
@@ -62,26 +63,21 @@ const StartGameScreen = (props) => {
 					onChangeText={onChangeTextHandler}
 					value={enteredValue}
 				/>
-			</Fragment>
-		);
-	};
-
-	const showConfirmResetButtons = () => {
-		return (
-			<View style={styles.buttonLayout}>
-				<View style={styles.buttonWrapper}>
-					<ButtonSecondary title="Reset" onPress={resetInputHandler} />
+				<View style={styles.buttonLayout}>
+					<View style={styles.buttonWrapper}>
+						<ButtonSecondary title="Reset" onPress={resetInputHandler} />
+					</View>
+					<View style={styles.buttonWrapper}>
+						<ButtonPrimary title="Confirm" onPress={confirmInputHander} />
+					</View>
 				</View>
-				<View style={styles.buttonWrapper}>
-					<ButtonPrimary title="Confirm" onPress={confirmInputHander} />
-				</View>
-			</View>
+			</Card>
 		);
 	};
 
 	const showStartButton = () => {
 		return (
-			<Fragment>
+			<Card style={styles.cardStyle}>
 				<ThemeText>You selected:</ThemeText>
 				<NumberContainer>{selectedValue}</NumberContainer>
 				<View style={styles.buttonLayout}>
@@ -93,7 +89,7 @@ const StartGameScreen = (props) => {
 						}}
 					/>
 				</View>
-			</Fragment>
+			</Card>
 		);
 	};
 
@@ -101,24 +97,18 @@ const StartGameScreen = (props) => {
 		<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
 			<View style={ThemeStyles.screen}>
 				<ThemeTextTitle>Start a New Game!</ThemeTextTitle>
-
-				<Card style={styles.inputContainer}>
-					{!confirmed && showInputBox()}
-					{!confirmed && showConfirmResetButtons()}
-					{confirmed && showStartButton()}
-				</Card>
+				{!confirmed && showInputForm()}
+				{confirmed && showStartButton()}
+				<View style={ThemeStyles.box2}></View>
 			</View>
 		</TouchableWithoutFeedback>
 	);
 };
 
 const styles = StyleSheet.create({
-	inputContainer: {
-		width: 330,
-		maxWidth: "80%",
-		alignItems: "center",
-		paddingHorizontal: 20,
-		paddingVertical: 40,
+	cardStyle: {
+		minHeight: 10,
+		marginTop: 40,
 	},
 	inputField: {
 		width: "18%",
@@ -128,9 +118,11 @@ const styles = StyleSheet.create({
 	},
 	buttonLayout: {
 		flexDirection: "row",
-		width: "100%",
 		justifyContent: "center",
-		marginTop: 15,
+		width: "100%",
+	},
+	startGameButton: {
+		marginBottom: 10,
 	},
 	buttonWrapper: {
 		marginHorizontal: 2,

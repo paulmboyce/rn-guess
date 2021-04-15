@@ -62,9 +62,9 @@ export const ThemeStyles = StyleSheet.create({
 	},
 	title: {
 		fontSize: 22,
-		marginVertical: 50,
 		color: Theme.titleColor,
 		fontFamily: Theme.fontFamilyBold,
+		marginTop: 20,
 	},
 	text: {
 		fontFamily: Theme.fontFamily,
