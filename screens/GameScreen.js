@@ -25,7 +25,7 @@ const renderListItem = (numGuesses, { item, index }) => {
 	return (
 		<View style={styles.listItem}>
 			<ThemeTextHighlight>
-				Guess #{numGuesses - index} - {item.value}
+				Guess #{(numGuesses - index).toString()} - {item.value}
 			</ThemeTextHighlight>
 		</View>
 	);
@@ -47,7 +47,7 @@ const GameScreen = ({ gameNumber, onClickEndGame, onGameOver }) => {
 	useEffect(() => {
 		setGuesses((currentGuesses) => [
 			...currentGuesses,
-			{ id: Math.random(), value: lastGuess.toString() },
+			{ id: Math.random().toString(), value: lastGuess.toString() },
 		]);
 	}, [lastGuess]);
 
