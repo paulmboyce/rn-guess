@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, Image } from "react-native";
+import { View, StyleSheet, Image, Dimensions } from "react-native";
 
 import { Theme, ThemeStyles } from "../themes";
 import {
@@ -37,10 +37,10 @@ const GameOverScreen = ({ numTries, onClickNewGame }) => {
 
 const styles = StyleSheet.create({
 	imageContainer: {
-		width: 200,
-		height: 200,
+		width: Dimensions.get("window").width * 0.5,
+		height: Dimensions.get("window").width * 0.5,
 		marginTop: 100,
-		borderRadius: 100,
+		borderRadius: Dimensions.get("window").width * 0.25,
 		borderWidth: 5,
 		borderColor: Theme.primaryColor,
 		overflow: "hidden",
