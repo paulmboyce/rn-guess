@@ -11,6 +11,7 @@ import {
 import { ThemeText, ThemeTextTitle, ThemeInput } from "../components/themed";
 import { Theme, ThemeStyles } from "../themes";
 import Card from "../components/Card";
+import Footer from "../components/Footer";
 import NumberContainer from "../components/NumberContainer";
 import ButtonPrimary from "../components/ButtonPrimary";
 import ButtonSecondary from "../components/ButtonSecondary";
@@ -100,6 +101,7 @@ const StartGameScreen = (props) => {
 				{!confirmed && showInputForm()}
 				{confirmed && showStartButton()}
 				<View style={ThemeStyles.box2}></View>
+				<Footer />
 			</View>
 		</TouchableWithoutFeedback>
 	);

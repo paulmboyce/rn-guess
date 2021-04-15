@@ -10,7 +10,6 @@ import {
 import ButtonPrimary from "../components/ButtonPrimary";
 
 const GameOverScreen = ({ numTries, onClickNewGame }) => {
-	console.log("RENDER: GameOverScreen..");
 	return (
 		<View style={ThemeStyles.screen}>
 			<View style={ThemeStyles.box1}>
