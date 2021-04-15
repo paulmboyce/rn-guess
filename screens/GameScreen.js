@@ -155,10 +155,11 @@ const styles = StyleSheet.create({
 		padding: 10,
 	},
 	howToPlay: {
-		fontSize: 16,
+		fontSize: Dimensions.get("window").height > 600 ? 20 : 16,
 		textAlign: "center",
 		paddingHorizontal: 50,
-		paddingVertical: 20,
+		paddingTop: 30,
+		paddingBottom: 10,
 	},
 	scrollContainer: {
 		flexGrow: 1,
