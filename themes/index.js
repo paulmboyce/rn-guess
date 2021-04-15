@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 
 const Fonts = {
 	family: "open-sans",
@@ -64,7 +64,7 @@ export const ThemeStyles = StyleSheet.create({
 		fontSize: 22,
 		color: Theme.titleColor,
 		fontFamily: Theme.fontFamilyBold,
-		marginTop: 20,
+		marginTop: Dimensions.get("window").height > 600 ? 40 : 20,
 	},
 	text: {
 		fontFamily: Theme.fontFamily,
