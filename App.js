@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Platform } from "react-native";
 import AppLoading from "expo-app-loading";
 
 import Header from "./components/Header";
@@ -20,7 +20,9 @@ function App() {
 			<AppLoading
 				startAsync={loadAssetsAsync}
 				onFinish={() => {
-					console.log("Finished loading resources. Starting app... ");
+					console.log(
+						`Finished loading resources. Starting app on [${Platform.OS}]... `
+					);
 					setIsAppReady(true);
 				}}
 				onError={console.warn}

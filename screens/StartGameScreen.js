@@ -6,6 +6,8 @@ import {
 	Keyboard,
 	Alert,
 	ScrollView,
+	KeyboardAvoidingView,
+	Platform,
 } from "react-native";
 
 import { ThemeText, ThemeTextTitle, ThemeInput } from "../components/themed";
@@ -96,15 +98,20 @@ const StartGameScreen = (props) => {
 
 	return (
 		<ScrollView>
-			<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-				<View style={ThemeStyles.screen}>
-					<ThemeTextTitle>Start a New Game!</ThemeTextTitle>
-					{!confirmed && showInputForm()}
-					{confirmed && showStartButton()}
-					<View style={ThemeStyles.box2}></View>
-					<Footer />
-				</View>
-			</TouchableWithoutFeedback>
+			<KeyboardAvoidingView
+				behavior={Platform.OS === "ios" ? "position" : "padding"}
+				keyboardVerticalOffset="20"
+			>
+				<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+					<View style={ThemeStyles.screen}>
+						<ThemeTextTitle>Start a New Game!</ThemeTextTitle>
+						{!confirmed && showInputForm()}
+						{confirmed && showStartButton()}
+						<View style={ThemeStyles.box2}></View>
+						<Footer />
+					</View>
+				</TouchableWithoutFeedback>
+			</KeyboardAvoidingView>
 		</ScrollView>
 	);
 };
