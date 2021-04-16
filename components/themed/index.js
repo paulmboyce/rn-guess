@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, TextInput } from "react-native";
+import { Text, TextInput, useWindowDimensions } from "react-native";
 import { Theme, ThemeStyles } from "../../themes";
 
 const ThemeText = (props) => {
@@ -21,7 +21,9 @@ const ThemeTextBold = (props) => {
 };
 
 const ThemeTextTitle = (props) => {
-	const style = { ...ThemeStyles.title, ...props.style };
+	const window = useWindowDimensions();
+	const marginTop = window.height * 0.05;
+	const style = { ...ThemeStyles.title, marginTop: marginTop, ...props.style };
 	return (
 		<ThemeText {...props} style={style}>
 			{props.children}

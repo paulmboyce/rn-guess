@@ -64,7 +64,6 @@ export const ThemeStyles = StyleSheet.create({
 		fontSize: 22,
 		color: Theme.titleColor,
 		fontFamily: Theme.fontFamilyBold,
-		marginTop: Dimensions.get("window").height > 600 ? 40 : 20,
 	},
 	text: {
 		fontFamily: Theme.fontFamily,
@@ -83,7 +82,8 @@ export const ThemeStyles = StyleSheet.create({
 	},
 	screen: {
 		flex: 1,
-		width: "100%",
+		width: Dimensions.get("window").width,
+		height: Dimensions.get("window").height,
 		padding: 5,
 		justifyContent: "flex-start",
 		alignItems: "center",

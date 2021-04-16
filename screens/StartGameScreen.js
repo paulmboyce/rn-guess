@@ -8,6 +8,7 @@ import {
 	ScrollView,
 	KeyboardAvoidingView,
 	Platform,
+	useWindowDimensions,
 } from "react-native";
 
 import { ThemeText, ThemeTextTitle, ThemeInput } from "../components/themed";
@@ -22,6 +23,37 @@ const StartGameScreen = (props) => {
 	const [enteredValue, setEnteredValue] = useState("");
 	const [confirmed, setConfirmed] = useState(false);
 	const [selectedValue, setSelectedValue] = useState(null);
+
+	const window = useWindowDimensions();
+
+	const styles = StyleSheet.create({
+		windowSize: {
+			width: window.width,
+			height: window.height,
+		},
+		cardStyle: {
+			minHeight: 10,
+			marginTop: window.height * 0.08,
+		},
+		inputField: {
+			width: "18%",
+			textAlign: "center",
+			fontFamily: Theme.fontFamilyBold,
+			color: Theme.secondaryColor,
+		},
+		buttonLayout: {
+			flexDirection: "row",
+			justifyContent: "center",
+			width: "100%",
+		},
+		startGameButton: {
+			marginBottom: 10,
+		},
+		buttonWrapper: {
+			marginHorizontal: 2,
+			width: "45%",
+		},
+	});
 
 	const onChangeTextHandler = (text) => {
 		setEnteredValue(removeNonNumeric(text));
@@ -100,10 +132,10 @@ const StartGameScreen = (props) => {
 		<ScrollView>
 			<KeyboardAvoidingView
 				behavior={Platform.OS === "ios" ? "position" : "padding"}
-				keyboardVerticalOffset="20"
+				keyboardVerticalOffset="10"
 			>
 				<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-					<View style={ThemeStyles.screen}>
+					<View style={{ ...ThemeStyles.screen, ...styles.windowSize }}>
 						<ThemeTextTitle>Start a New Game!</ThemeTextTitle>
 						{!confirmed && showInputForm()}
 						{confirmed && showStartButton()}
@@ -116,28 +148,4 @@ const StartGameScreen = (props) => {
 	);
 };
 
-const styles = StyleSheet.create({
-	cardStyle: {
-		minHeight: 10,
-		marginTop: 40,
-	},
-	inputField: {
-		width: "18%",
-		textAlign: "center",
-		fontFamily: Theme.fontFamilyBold,
-		color: Theme.secondaryColor,
-	},
-	buttonLayout: {
-		flexDirection: "row",
-		justifyContent: "center",
-		width: "100%",
-	},
-	startGameButton: {
-		marginBottom: 10,
-	},
-	buttonWrapper: {
-		marginHorizontal: 2,
-		width: "45%",
-	},
-});
 export default StartGameScreen;
