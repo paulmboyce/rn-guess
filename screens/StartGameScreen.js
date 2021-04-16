@@ -25,6 +25,7 @@ const StartGameScreen = (props) => {
 	const [selectedValue, setSelectedValue] = useState(null);
 
 	const window = useWindowDimensions();
+	const landScape = window.width > window.height;
 
 	const styles = StyleSheet.create({
 		windowSize: {
@@ -131,8 +132,9 @@ const StartGameScreen = (props) => {
 	return (
 		<ScrollView>
 			<KeyboardAvoidingView
+				enabled={landScape ? true : false}
 				behavior={Platform.OS === "ios" ? "position" : "padding"}
-				keyboardVerticalOffset="10"
+				keyboardVerticalOffset={landScape ? -80 : -120}
 			>
 				<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
 					<View style={{ ...ThemeStyles.screen, ...styles.windowSize }}>
