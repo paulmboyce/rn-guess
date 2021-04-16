@@ -58,7 +58,7 @@ const GameOverScreen = ({ numTries, onClickNewGame }) => {
 					rounds!
 				</ThemeTextTitle>
 			</View>
-			<View style={{ ...ThemeStyles.box1, justifyContent: "space-evenly" }}>
+			<View style={ThemeStyles.box1}>
 				<ThemeText style={styles.text}>Want to play again?</ThemeText>
 				<View style={{ paddingTop: 20 }}>
 					<ButtonPrimary onPress={onClickNewGame} title="PLAY AGAIN" />
