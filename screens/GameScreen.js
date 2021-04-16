@@ -1,5 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
-import { View, StyleSheet, Alert, FlatList, Dimensions } from "react-native";
+import {
+	View,
+	StyleSheet,
+	Alert,
+	FlatList,
+	Dimensions,
+	ScrollView,
+} from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
 import { Theme, ThemeStyles } from "../themes";
@@ -92,55 +99,57 @@ const GameScreen = ({ gameNumber, onClickEndGame, onGameOver }) => {
 	};
 
 	return (
-		<View style={ThemeStyles.screen}>
-			<ThemeText style={styles.howToPlay}>
-				Press DOWN or UP button to give the robot clues.
-			</ThemeText>
-			<View style={ThemeStyles.box2}>
-				<Card style={styles.card}>
-					<ThemeText>Robot Guess is</ThemeText>
-					<View style={styles.guessClueLayout}>
-						<View style={ThemeStyles.buttonWrapperSmall}>
-							<ButtonPrimary title="LOWER" onPress={guessLower}>
-								<AntDesign name="caretdown" size={22} />
-							</ButtonPrimary>
+		<ScrollView>
+			<View style={ThemeStyles.screen}>
+				<ThemeText style={styles.howToPlay}>
+					Press DOWN or UP button to give the robot clues.
+				</ThemeText>
+				<View style={ThemeStyles.box2}>
+					<Card style={styles.card}>
+						<ThemeText>Robot Guess is</ThemeText>
+						<View style={styles.guessClueLayout}>
+							<View style={ThemeStyles.buttonWrapperSmall}>
+								<ButtonPrimary title="LOWER" onPress={guessLower}>
+									<AntDesign name="caretdown" size={22} />
+								</ButtonPrimary>
+							</View>
+							<NumberContainer>{lastGuess}</NumberContainer>
+							<View style={ThemeStyles.buttonWrapperSmall}>
+								<ButtonPrimary title="HIGHER" onPress={guessHigher}>
+									<AntDesign name="caretup" size={22} />
+								</ButtonPrimary>
+							</View>
 						</View>
-						<NumberContainer>{lastGuess}</NumberContainer>
-						<View style={ThemeStyles.buttonWrapperSmall}>
-							<ButtonPrimary title="HIGHER" onPress={guessHigher}>
-								<AntDesign name="caretup" size={22} />
-							</ButtonPrimary>
-						</View>
-					</View>
-				</Card>
-			</View>
-			<View
-				style={{
-					...ThemeStyles.box1,
-					width: Dimensions.get("window").width * 0.6,
-				}}
-			>
-				{/* The bind (below) passes guesses.length as the 1st param to
-				    renderListItem. The item passed by FlatList is 2nd param */}
-				<FlatList
-					horizontal={true}
-					contentContainerStyle={styles.scrollContainer}
-					data={reversedGuesses()}
-					keyExtractor={(item) => item.id}
-					renderItem={renderListItem.bind(null, guesses.length)}
-					ref={(ref) => {
-						flatListRef = ref;
+					</Card>
+				</View>
+				<View
+					style={{
+						...ThemeStyles.box1,
+						width: Dimensions.get("window").width * 0.6,
 					}}
-				></FlatList>
+				>
+					{/* The bind (below) passes guesses.length as the 1st param to
+				    renderListItem. The item passed by FlatList is 2nd param */}
+					<FlatList
+						horizontal={true}
+						contentContainerStyle={styles.scrollContainer}
+						data={reversedGuesses()}
+						keyExtractor={(item) => item.id}
+						renderItem={renderListItem.bind(null, guesses.length)}
+						ref={(ref) => {
+							flatListRef = ref;
+						}}
+					></FlatList>
+				</View>
+				<View style={ThemeStyles.box1}>
+					<ButtonSecondary
+						onPress={onClickEndGame}
+						title="End Game"
+						color={Theme.secondaryColor}
+					/>
+				</View>
 			</View>
-			<View style={ThemeStyles.box1}>
-				<ButtonSecondary
-					onPress={onClickEndGame}
-					title="End Game"
-					color={Theme.secondaryColor}
-				/>
-			</View>
-		</View>
+		</ScrollView>
 	);
 };
 

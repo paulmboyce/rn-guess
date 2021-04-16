@@ -1,11 +1,11 @@
-import React, { useState, Fragment } from "react";
+import React, { useState } from "react";
 import {
 	View,
 	StyleSheet,
 	TouchableWithoutFeedback,
 	Keyboard,
 	Alert,
-	Dimensions,
+	ScrollView,
 } from "react-native";
 
 import { ThemeText, ThemeTextTitle, ThemeInput } from "../components/themed";
@@ -95,15 +95,17 @@ const StartGameScreen = (props) => {
 	};
 
 	return (
-		<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-			<View style={ThemeStyles.screen}>
-				<ThemeTextTitle>Start a New Game!</ThemeTextTitle>
-				{!confirmed && showInputForm()}
-				{confirmed && showStartButton()}
-				<View style={ThemeStyles.box2}></View>
-				<Footer />
-			</View>
-		</TouchableWithoutFeedback>
+		<ScrollView>
+			<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+				<View style={ThemeStyles.screen}>
+					<ThemeTextTitle>Start a New Game!</ThemeTextTitle>
+					{!confirmed && showInputForm()}
+					{confirmed && showStartButton()}
+					<View style={ThemeStyles.box2}></View>
+					<Footer />
+				</View>
+			</TouchableWithoutFeedback>
+		</ScrollView>
 	);
 };
 
