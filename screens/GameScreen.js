@@ -6,6 +6,7 @@ import {
 	FlatList,
 	Dimensions,
 	ScrollView,
+	useWindowDimensions,
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
@@ -19,34 +20,62 @@ import ButtonSecondary from "../components/ButtonSecondary";
 const generateRandomNumber = (min, max, exclude) => {
 	min = Math.ceil(min);
 	max = Math.floor(max);
-
 	const random = Math.floor(Math.random() * (max - min) + min);
 	if (random === exclude) {
 		return generateRandomNumber(min, max, exclude);
 	}
-
 	return random;
 };
 
 let flatListRef;
-const renderListItem = (numGuesses, { item, index }) => {
-	return (
-		<View style={styles.listItem}>
-			<ThemeTextHighlight>
-				Guess #{(numGuesses - index).toString()} - {item.value}
-			</ThemeTextHighlight>
-		</View>
-	);
-};
 
 const GameScreen = ({ gameNumber, onClickEndGame, onGameOver }) => {
 	const [lastGuess, setLastGuess] = useState(
 		generateRandomNumber(1, 100, gameNumber)
 	);
 	const [guesses, setGuesses] = useState([]);
-
 	const minGuess = useRef(0);
 	const maxGuess = useRef(100);
+	const window = useWindowDimensions();
+
+	const styles = StyleSheet.create({
+		windowSize: {
+			width: window.width,
+			height: window.height,
+		},
+		guessClueLayout: {
+			flexDirection: "row",
+			justifyContent: "center",
+			alignItems: "center",
+		},
+		card: {
+			maxWidth: "80%",
+			padding: 10,
+		},
+		howToPlay: {
+			fontSize: Dimensions.get("window").height > 600 ? 20 : 16,
+			textAlign: "center",
+			paddingHorizontal: 50,
+			paddingTop: 30,
+			paddingBottom: 10,
+		},
+		scrollContainer: {
+			flexGrow: 1,
+			marginTop: 40,
+			justifyContent: "center",
+		},
+		listItem: {
+			justifyContent: "center",
+			alignItems: "center",
+			width: Dimensions.get("window").width * 0.55,
+			maxHeight: 40,
+			marginBottom: 20,
+			marginRight: 2,
+			borderColor: Theme.borderColor,
+			borderWidth: Theme.borderWidth,
+			borderRadius: 3,
+		},
+	});
 
 	useEffect(() => {
 		checkForWin();
@@ -80,7 +109,6 @@ const GameScreen = ({ gameNumber, onClickEndGame, onGameOver }) => {
 			showCheatAlert();
 			return;
 		}
-
 		const top = Math.min(maxGuess.current, lastGuess);
 		maxGuess.current = top;
 		setLastGuess(generateRandomNumber(minGuess.current, top, lastGuess));
@@ -98,9 +126,19 @@ const GameScreen = ({ gameNumber, onClickEndGame, onGameOver }) => {
 		flatListRef.scrollToIndex({ animated: true, index: 0 });
 	};
 
+	const renderListItem = (numGuesses, { item, index }) => {
+		return (
+			<View style={styles.listItem}>
+				<ThemeTextHighlight>
+					Guess #{(numGuesses - index).toString()} - {item.value}
+				</ThemeTextHighlight>
+			</View>
+		);
+	};
+
 	return (
 		<ScrollView>
-			<View style={ThemeStyles.screen}>
+			<View style={{ ...ThemeStyles.screen, ...styles.windowSize }}>
 				<ThemeText style={styles.howToPlay}>
 					Press DOWN or UP button to give the robot clues.
 				</ThemeText>
@@ -152,40 +190,5 @@ const GameScreen = ({ gameNumber, onClickEndGame, onGameOver }) => {
 		</ScrollView>
 	);
 };
-
-const styles = StyleSheet.create({
-	guessClueLayout: {
-		flexDirection: "row",
-		justifyContent: "center",
-		alignItems: "center",
-	},
-	card: {
-		maxWidth: "80%",
-		padding: 10,
-	},
-	howToPlay: {
-		fontSize: Dimensions.get("window").height > 600 ? 20 : 16,
-		textAlign: "center",
-		paddingHorizontal: 50,
-		paddingTop: 30,
-		paddingBottom: 10,
-	},
-	scrollContainer: {
-		flexGrow: 1,
-		marginTop: 40,
-		justifyContent: "center",
-	},
-	listItem: {
-		justifyContent: "center",
-		alignItems: "center",
-		width: Dimensions.get("window").width * 0.55,
-		maxHeight: 40,
-		marginBottom: 20,
-		marginRight: 2,
-		borderColor: Theme.borderColor,
-		borderWidth: Theme.borderWidth,
-		borderRadius: 3,
-	},
-});
 
 export default GameScreen;
