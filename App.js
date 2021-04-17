@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Platform } from "react-native";
+import { View, StyleSheet, Platform, SafeAreaView } from "react-native";
 import AppLoading from "expo-app-loading";
 
 import Header from "./components/Header";
@@ -78,11 +78,11 @@ function App() {
 	};
 
 	return (
-		<View style={styles.screen}>
+		<SafeAreaView style={styles.screen}>
 			<Header title="Best Fun Game Ever" />
 			{renderCurrentScreen()}
 			<Footer />
-		</View>
+		</SafeAreaView>
 	);
 }
 
