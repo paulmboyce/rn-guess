@@ -1,19 +1,29 @@
 import React from "react";
-import { View, TouchableOpacity } from "react-native";
+import {
+	View,
+	TouchableOpacity,
+	TouchableNativeFeedback,
+	Platform,
+} from "react-native";
 
 import { ThemeText } from "./themed";
 import { ThemeStyles } from "../themes";
 
+let ButtonTouchable = TouchableOpacity;
+if (Platform.OS === "android" && Platform.Version >= 21) {
+	ButtonTouchable = TouchableNativeFeedback;
+}
+
 const ButtonPrimary = (props) => {
 	const content = props.children || props.title || "";
 	return (
-		<TouchableOpacity {...props}>
+		<ButtonTouchable {...props}>
 			<View style={{ ...ThemeStyles.buttonContainer, ...props.style }}>
 				<ThemeText {...props} style={{ ...ThemeStyles.button }}>
 					{content}
 				</ThemeText>
 			</View>
-		</TouchableOpacity>
+		</ButtonTouchable>
 	);
 };
 
