@@ -3,6 +3,7 @@ import { View, StyleSheet, Platform } from "react-native";
 import AppLoading from "expo-app-loading";
 
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 import StartGameScreen from "./screens/StartGameScreen";
 import GameScreen from "./screens/GameScreen";
 import GameOverScreen from "./screens/GameOverScreen";
@@ -80,6 +81,7 @@ function App() {
 		<View style={styles.screen}>
 			<Header title="Best Fun Game Ever" />
 			{renderCurrentScreen()}
+			<Footer />
 		</View>
 	);
 }
