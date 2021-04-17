@@ -13,15 +13,20 @@ const Header = ({ title }) => {
 	const isIOS = Platform.OS === "ios";
 
 	const styles = StyleSheet.create({
-		header: {
+		headerBase: {
 			width: "100%",
 			height: landScape ? 63 : 64 + paddingTop,
 			paddingTop: landScape ? 20 : paddingTop,
-			backgroundColor: isIOS ? Theme.backgroundColor : Theme.primaryColor,
 			justifyContent: "center",
 			alignItems: "center",
+		},
+		headerIOS: {
+			backgroundColor: Theme.backgroundColor,
 			borderBottomColor: Theme.primaryColor,
-			borderBottomWidth: isIOS ? 1 : 0,
+			borderBottomWidth: 1,
+		},
+		headerAndroid: {
+			backgroundColor: Theme.primaryColor,
 		},
 		text: {
 			color: isIOS ? Theme.primaryColor : Theme.backgroundColor,
@@ -30,7 +35,15 @@ const Header = ({ title }) => {
 	});
 
 	return (
-		<View style={styles.header}>
+		<View
+			style={{
+				...styles.headerBase,
+				...Platform.select({
+					ios: styles.headerIOS,
+					android: styles.headerAndroid,
+				}),
+			}}
+		>
 			<ThemeTextBold style={styles.text}>{title}</ThemeTextBold>
 		</View>
 	);
