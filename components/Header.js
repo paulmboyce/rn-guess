@@ -10,17 +10,21 @@ const Header = ({ title }) => {
 	const window = useWindowDimensions();
 	const landScape = window.width > window.height;
 
+	const isIOS = Platform.OS === "ios";
+
 	const styles = StyleSheet.create({
 		header: {
 			width: "100%",
 			height: landScape ? 63 : 64 + paddingTop,
 			paddingTop: landScape ? 20 : paddingTop,
-			backgroundColor: Theme.primaryColor,
+			backgroundColor: isIOS ? Theme.backgroundColor : Theme.primaryColor,
 			justifyContent: "center",
 			alignItems: "center",
+			borderBottomColor: Theme.primaryColor,
+			borderBottomWidth: isIOS ? 1 : 0,
 		},
 		text: {
-			color: "white",
+			color: isIOS ? Theme.primaryColor : Theme.backgroundColor,
 			fontSize: 24,
 		},
 	});
