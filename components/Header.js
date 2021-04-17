@@ -13,7 +13,7 @@ const Header = ({ title }) => {
 	const styles = StyleSheet.create({
 		header: {
 			width: "100%",
-			height: landScape ? 65 : 64 + paddingTop,
+			height: landScape ? 63 : 64 + paddingTop,
 			paddingTop: landScape ? 20 : paddingTop,
 			backgroundColor: Theme.primaryColor,
 			justifyContent: "center",

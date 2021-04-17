@@ -37,6 +37,7 @@ const GameScreen = ({ gameNumber, onClickEndGame, onGameOver }) => {
 	const minGuess = useRef(0);
 	const maxGuess = useRef(100);
 	const window = useWindowDimensions();
+	const landScape = window.width > window.height;
 
 	const styles = StyleSheet.create({
 		windowSize: {
@@ -50,26 +51,27 @@ const GameScreen = ({ gameNumber, onClickEndGame, onGameOver }) => {
 		},
 		card: {
 			maxWidth: "80%",
-			padding: 10,
+			paddingHorizontal: 10,
+			paddingVertical: landScape ? 5 : 10,
 		},
 		howToPlay: {
 			fontSize: Dimensions.get("window").height > 600 ? 20 : 16,
 			textAlign: "center",
 			paddingHorizontal: 50,
 			paddingTop: 30,
-			paddingBottom: 10,
+			paddingBottom: landScape ? 5 : 10,
 		},
 		scrollContainer: {
 			flexGrow: 1,
-			marginTop: 40,
+			marginTop: landScape ? 10 : 40,
 			justifyContent: "center",
 		},
 		listItem: {
 			justifyContent: "center",
 			alignItems: "center",
-			width: Dimensions.get("window").width * 0.55,
-			maxHeight: 40,
-			marginBottom: 20,
+			width: window.width * 0.58,
+			maxHeight: landScape ? 30 : 40,
+			marginBottom: landScape ? 5 : 20,
 			marginRight: 2,
 			borderColor: Theme.borderColor,
 			borderWidth: Theme.borderWidth,
@@ -142,7 +144,7 @@ const GameScreen = ({ gameNumber, onClickEndGame, onGameOver }) => {
 				<ThemeText style={styles.howToPlay}>
 					Press DOWN or UP button to give the robot clues.
 				</ThemeText>
-				<View style={ThemeStyles.box2}>
+				<View style={ThemeStyles.box1}>
 					<Card style={styles.card}>
 						<ThemeText>Robot Guess is</ThemeText>
 						<View style={styles.guessClueLayout}>
@@ -151,7 +153,19 @@ const GameScreen = ({ gameNumber, onClickEndGame, onGameOver }) => {
 									<AntDesign name="caretdown" size={22} />
 								</ButtonPrimary>
 							</View>
-							<NumberContainer>{lastGuess}</NumberContainer>
+							<NumberContainer
+								style={
+									landScape
+										? {
+												paddingHorizontal: 20,
+												paddingVertical: 2,
+												fontSize: 10,
+										  }
+										: {}
+								}
+							>
+								{lastGuess}
+							</NumberContainer>
 							<View style={ThemeStyles.buttonWrapperSmall}>
 								<ButtonPrimary title="HIGHER" onPress={guessHigher}>
 									<AntDesign name="caretup" size={22} />
@@ -163,7 +177,8 @@ const GameScreen = ({ gameNumber, onClickEndGame, onGameOver }) => {
 				<View
 					style={{
 						...ThemeStyles.box1,
-						width: Dimensions.get("window").width * 0.6,
+						width: window.width * 0.6,
+						justifyContent: "space-between",
 					}}
 				>
 					{/* The bind (below) passes guesses.length as the 1st param to
@@ -178,8 +193,6 @@ const GameScreen = ({ gameNumber, onClickEndGame, onGameOver }) => {
 							flatListRef = ref;
 						}}
 					></FlatList>
-				</View>
-				<View style={ThemeStyles.box1}>
 					<ButtonSecondary
 						onPress={onClickEndGame}
 						title="End Game"

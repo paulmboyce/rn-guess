@@ -24,7 +24,7 @@ const NumberContainer = (props) => {
 	});
 
 	return (
-		<View style={styles.container}>
+		<View style={{ ...styles.container, ...props.style }}>
 			<ThemeTextBold style={styles.text}>{props.children}</ThemeTextBold>
 		</View>
 	);
